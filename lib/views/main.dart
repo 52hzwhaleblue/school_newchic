@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'views/onboarding_page.dart';
+import 'package:onboarding_demo/views/onboarding_page.dart';
+import 'package:onboarding_demo/views/details.dart';
 
 void main() {
   runApp(MyApp());
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       debugShowCheckedModeBanner: false,
-      home: OnboardingPage(),
+      home: Detail(),
     );
   }
 }

@@ -1,8 +1,18 @@
+// ignore_for_file: unnecessary_statements
+import 'package:onboarding_demo/views/get_started.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:onboarding_demo/controllers/onboarding_controller.dart';
+import 'package:onboarding_demo/views/login.dart';
 
-class OnboardingPage extends StatelessWidget {
+class OnboardingPage extends StatefulWidget {
+  const OnboardingPage({key}) : super(key: key);
+
+  @override
+  State<OnboardingPage> createState() => _OnboardingPage();
+}
+
+class _OnboardingPage extends State<OnboardingPage> {
   final _controller = OnboardingController();
   @override
   Widget build(BuildContext context) {
@@ -20,12 +30,17 @@ class OnboardingPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Image.asset(
-                            _controller.onboardingPages[index].imageAsset),
+                          _controller.onboardingPages[index].imageAsset,
+                          // width: 500,
+                          // height: 400,
+                        ),
                         SizedBox(height: 32),
                         Text(
                           _controller.onboardingPages[index].title,
                           style: TextStyle(
-                              fontSize: 24, fontWeight: FontWeight.w500),
+                            fontSize: 24,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                         SizedBox(height: 32),
                         Padding(
@@ -67,7 +82,20 @@ class OnboardingPage extends StatelessWidget {
               bottom: 20,
               child: FloatingActionButton(
                 elevation: 0,
-                onPressed: _controller.forwardAction,
+                onPressed: () {
+                  setState(() {
+                    if (_controller.isLastPage) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => GetStarted(),
+                        ),
+                      );
+                    } else {
+                      _controller.forwardAction;
+                    }
+                  });
+                },
                 child: Obx(() {
                   return Text(_controller.isLastPage ? 'Start' : 'Next');
                 }),

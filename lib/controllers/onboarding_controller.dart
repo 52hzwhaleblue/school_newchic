@@ -10,17 +10,18 @@ class OnboardingController extends GetxController {
 
   forwardAction() {
     if (isLastPage) {
-      //go to home page
-    } else
+      //
+    } else {
       pageController.nextPage(duration: 300.milliseconds, curve: Curves.ease);
+    }
   }
 
   List<OnboardingInfo> onboardingPages = [
-    OnboardingInfo('assets/order.png', 'Order Your Food',
-        'Now you can order food any time  right from your mobile.'),
-    OnboardingInfo('assets/cook.png', 'Cooking Safe Food',
-        'We are maintain safty and We keep clean while making food.'),
-    OnboardingInfo('assets/deliver.png', 'Quick Delivery',
-        'Orders your favorite meals will be  immediately deliver')
+    OnboardingInfo('assets/model1.jpg', 'Hoodie',
+        'Style is something each of us already has, all we need to do is find it.'),
+    OnboardingInfo('assets/model2.jpg', 'Casual Sweatshirt',
+        'Fashion is the armor to survive the reality of everyday life.'),
+    OnboardingInfo(
+        'assets/model4.jpg', 'Shirt', 'The joy of dressing is an art.'),
   ];
 }
