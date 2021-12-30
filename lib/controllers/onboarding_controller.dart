@@ -7,6 +7,7 @@ class OnboardingController extends GetxController {
   var selectedPageIndex = 0.obs;
   bool get isLastPage => selectedPageIndex.value == onboardingPages.length - 1;
   var pageController = PageController();
+  var banner = PageController();
 
   forwardAction() {
     if (isLastPage) {
@@ -17,11 +18,11 @@ class OnboardingController extends GetxController {
   }
 
   List<OnboardingInfo> onboardingPages = [
-    OnboardingInfo('assets/model1.jpg', 'Hoodie',
+    OnboardingInfo('assets/op/model6.jpeg', 'Hoodie',
         'Style is something each of us already has, all we need to do is find it.'),
-    OnboardingInfo('assets/model2.jpg', 'Casual Sweatshirt',
+    OnboardingInfo('assets/op/model7.jpg', 'Hoodie',
+        'Style is something each of us already has, all we need to do is find it.'),
+    OnboardingInfo('assets/op/model8.jpg', 'Casual Sweatshirt',
         'Fashion is the armor to survive the reality of everyday life.'),
-    OnboardingInfo(
-        'assets/model4.jpg', 'Shirt', 'The joy of dressing is an art.'),
   ];
 }
