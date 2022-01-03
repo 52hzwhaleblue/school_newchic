@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:onboarding_demo/models/home/banner/ARMY/MODEL_banner_ARMY.dart';
+import 'package:onboarding_demo/views/Category_button_bar/category_screen.dart';
+import 'package:onboarding_demo/views/SearchScreen.dart';
 
 import 'package:onboarding_demo/views/trang-san-pham/Army/ArmyScreen.dart';
 import 'package:onboarding_demo/views/trang-san-pham/Women/WomenScreen.dart';
@@ -48,60 +50,106 @@ class _BodyState extends State<Body> {
       home: Scaffold(
         body: Stack(
           children: [
-            SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  searchBar(), // search bar
-
-                  // Categories(), // tab bar
-
-                  Padding(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: KDefaultPadding),
-                    child: SizedBox(
-                      height: 25,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: categories.length,
-                        itemBuilder: (context, index) => buildTapBar(index),
-                      ),
-                    ),
-                  ),
-
-                  builBannerARMY(context),
-
-                  Categories_List_Army(size: size),
-
-                  title(), // You might also like
-
-                  item_card_Army(size: size),
-                ],
-              ),
-            ),
+            main(context, size),
+            bottom_bar(
+              size,
+            )
           ],
         ),
       ),
     );
   }
 
-  Widget searchBar() {
-    return Container(
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: TextField(
-          style: TextStyle(height: 1),
-          decoration: InputDecoration(
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(24),
+  Positioned main(BuildContext context, Size size) {
+    return Positioned(
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            searchBar(context), // search bar
+
+            // Categories(), // tab bar
+
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: KDefaultPadding),
+              child: SizedBox(
+                height: 25,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: categories.length,
+                  itemBuilder: (context, index) => buildTapBar(index),
+                ),
+              ),
             ),
-            suffixIcon: IconButton(
-              icon: Icon(Icons.search),
-              onPressed: () {
-                setState(() {});
-              },
+
+            builBannerARMY(context),
+
+            Categories_List_Army(size: size),
+
+            title(), // You might also like
+
+            item_card_Army(size: size),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget searchBar(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    return SafeArea(
+      child: Container(
+        height: 70,
+        width: size.width,
+        child: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: Row(
+                children: [
+                  Text(
+                    "New",
+                    style: TextStyle(
+                      fontSize: 30,
+                      fontFamily: "RobotoMono",
+                    ),
+                  ),
+                  Text(
+                    "chic",
+                    style: TextStyle(
+                      fontSize: 30,
+                      color: Colors.pink,
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
+            Container(
+              margin: EdgeInsets.only(left: 10),
+              width: 250,
+              height: 40,
+              child: TextField(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => SearchScreen()));
+                },
+                style: TextStyle(color: Colors.white),
+                obscureText: true,
+                decoration: InputDecoration(
+                  labelStyle: TextStyle(color: Colors.grey),
+                  contentPadding: EdgeInsets.all(5),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                  labelText: 'Password',
+                  prefixIcon: IconButton(
+                    onPressed: null,
+                    icon: Icon(Icons.search),
+                  ),
+                ),
+              ),
+            )
+          ],
         ),
       ),
     );
@@ -220,6 +268,88 @@ class _BodyState extends State<Body> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  int selectedIndex = 0;
+  Positioned bottom_bar(Size size) {
+    return new Positioned(
+      bottom: 0,
+      child: Container(
+        width: size.width,
+        height: 60,
+        color: Colors.white,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            IconButton(
+              onPressed: () {
+                setState(() {
+                  selectedIndex = 0;
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => HomeScreen(),
+                    ),
+                  );
+                });
+              },
+              icon: Icon(Icons.home),
+              iconSize: 30,
+              color: selectedIndex == 0 ? Colors.pink : Colors.black,
+            ),
+            IconButton(
+              icon: Icon(Icons.category_outlined),
+              onPressed: () {
+                setState(() {
+                  selectedIndex = 1;
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CategoryScreen(),
+                      settings: RouteSettings(
+                        arguments: selectedIndex,
+                      ),
+                    ),
+                  );
+                });
+              },
+              color: selectedIndex == 1 ? Colors.pink : Colors.black,
+              iconSize: 30,
+            ),
+            IconButton(
+              onPressed: () {
+                setState(() {
+                  selectedIndex = 2;
+                });
+              },
+              icon: Icon(Icons.whatshot_outlined),
+              iconSize: 30,
+              color: selectedIndex == 2 ? Colors.pink : Colors.black,
+            ),
+            IconButton(
+              onPressed: () {
+                setState(() {
+                  selectedIndex = 3;
+                });
+              },
+              icon: Icon(Icons.chat_bubble_outline),
+              iconSize: 30,
+              color: selectedIndex == 3 ? Colors.pink : Colors.black,
+            ),
+            IconButton(
+              onPressed: () {
+                setState(() {
+                  selectedIndex = 4;
+                });
+              },
+              icon: Icon(Icons.person_outline),
+              iconSize: 30,
+              color: selectedIndex == 4 ? Colors.pink : Colors.black,
+            ),
+          ],
+        ),
       ),
     );
   }
