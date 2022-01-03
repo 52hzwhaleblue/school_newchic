@@ -12,7 +12,7 @@ class Categories_List_Men extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 215,
+      height: 240,
       width: size.width,
       child: GridView.builder(
         physics: NeverScrollableScrollPhysics(),
