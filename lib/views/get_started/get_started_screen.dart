@@ -2,9 +2,9 @@ library get_started.dart;
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:onboarding_demo/views/login/login_screen.dart';
+import 'package:onboarding_demo/views/dang-nhap/login_screen.dart';
 
-import 'package:onboarding_demo/views/register/register.dart';
+import 'package:onboarding_demo/views/dang-ky/register.dart';
 
 class GetStartedScreen extends StatefulWidget {
   const GetStartedScreen({key}) : super(key: key);

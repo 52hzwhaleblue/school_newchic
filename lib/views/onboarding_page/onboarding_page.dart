@@ -3,7 +3,7 @@ import 'package:onboarding_demo/views/get_started/get_started_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:onboarding_demo/controllers/onboarding_controller.dart';
-import 'package:onboarding_demo/views/login/login_screen.dart';
+import 'package:onboarding_demo/views/dang-nhap/login_screen.dart';
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({key}) : super(key: key);

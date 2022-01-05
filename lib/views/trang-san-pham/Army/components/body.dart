@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:onboarding_demo/models/home/banner/ARMY/MODEL_banner_ARMY.dart';
-import 'package:onboarding_demo/views/Category_button_bar/category_screen.dart';
+import 'package:onboarding_demo/views/danh-muc-san-pham/category_screen.dart';
 import 'package:onboarding_demo/views/SearchScreen.dart';
 
 import 'package:onboarding_demo/views/trang-san-pham/Army/ArmyScreen.dart';
+import 'package:onboarding_demo/views/trang-san-pham/Men/MenScreen.dart';
+import 'package:onboarding_demo/views/trang-san-pham/Men/components/title.dart';
 import 'package:onboarding_demo/views/trang-san-pham/Women/WomenScreen.dart';
-import 'package:onboarding_demo/views/categories%20list/Categoies_List_Army.dart';
+import 'package:onboarding_demo/views/loai-san-pham/Categoies_List_Army.dart';
 
 import 'package:onboarding_demo/views/constants.dart';
 import 'package:onboarding_demo/views/trang-san-pham/Army/components/item-card_Army.dart';
-
-import 'package:onboarding_demo/views/home/components/title.dart';
-import 'package:onboarding_demo/views/home/home_screen.dart';
 
 class Body extends StatefulWidget {
   Body({Key key}) : super(key: key);
@@ -47,13 +46,14 @@ class _BodyState extends State<Body> {
     Size size = MediaQuery.of(context).size;
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Stack(
           children: [
             main(context, size),
-            bottom_bar(
-              size,
-            )
+            // bottom_bar(
+            //   size,
+            // )
           ],
         ),
       ),
@@ -66,10 +66,6 @@ class _BodyState extends State<Body> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            searchBar(context), // search bar
-
-            // Categories(), // tab bar
-
             Padding(
               padding: const EdgeInsets.symmetric(vertical: KDefaultPadding),
               child: SizedBox(
@@ -141,7 +137,7 @@ class _BodyState extends State<Body> {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30.0),
                   ),
-                  labelText: 'Password',
+                  labelText: 'Search',
                   prefixIcon: IconButton(
                     onPressed: null,
                     icon: Icon(Icons.search),
@@ -167,7 +163,7 @@ class _BodyState extends State<Body> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => HomeScreen(),
+                builder: (context) => MenScreen(),
                 settings: RouteSettings(
                   arguments: selectedIndex,
                 ),
@@ -198,17 +194,17 @@ class _BodyState extends State<Body> {
             );
           }
 
-          if (selectedIndex == 3) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => ArmyScreen(),
-                settings: RouteSettings(
-                  arguments: selectedIndex,
-                ),
-              ),
-            );
-          }
+          // if (selectedIndex == 3) {
+          //   Navigator.push(
+          //     context,
+          //     MaterialPageRoute(
+          //       builder: (context) => ArmyScreen(),
+          //       settings: RouteSettings(
+          //         arguments: selectedIndex,
+          //       ),
+          //     ),
+          //   );
+          // }
         });
       },
       child: Padding(
@@ -290,7 +286,7 @@ class _BodyState extends State<Body> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => HomeScreen(),
+                      builder: (context) => MenScreen(),
                     ),
                   );
                 });

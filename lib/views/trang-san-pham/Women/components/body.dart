@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
 import 'package:onboarding_demo/models/home/banner/WOMEN/MODEL_banner_WOMEN.dart';
-import 'package:onboarding_demo/views/Category_button_bar/category_screen.dart';
-import 'package:onboarding_demo/views/SearchScreen.dart';
-import 'package:onboarding_demo/views/categories%20list/Categoies_List_Women.dart';
+
+import 'package:onboarding_demo/views/loai-san-pham/Categoies_List_Women.dart';
 
 import 'package:onboarding_demo/views/constants.dart';
+import 'package:onboarding_demo/views/trang-san-pham/Men/MenScreen.dart';
+import 'package:onboarding_demo/views/trang-san-pham/Men/components/title.dart';
+import 'package:onboarding_demo/views/trang-san-pham/Women/WomenScreen.dart';
 
 import 'package:onboarding_demo/views/trang-san-pham/Women/components/item-card_Women.dart';
 
-import 'package:onboarding_demo/views/home/components/title.dart';
-import 'package:onboarding_demo/views/home/home_screen.dart';
 import 'package:onboarding_demo/views/trang-san-pham/Army/ArmyScreen.dart';
 
 class Body extends StatefulWidget {
@@ -46,11 +46,11 @@ class _BodyState extends State<Body> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Stack(
           children: [
             main(context, size),
-            bottom_bar(size),
           ],
         ),
       ),
@@ -63,10 +63,6 @@ class _BodyState extends State<Body> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            searchBar(context), // search bar
-
-            // Categories(), // tab bar
-
             Padding(
               padding: const EdgeInsets.symmetric(vertical: KDefaultPadding),
               child: SizedBox(
@@ -92,66 +88,6 @@ class _BodyState extends State<Body> {
     );
   }
 
-  Widget searchBar(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    return SafeArea(
-      child: Container(
-        height: 70,
-        width: size.width,
-        child: Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 10),
-              child: Row(
-                children: [
-                  Text(
-                    "New",
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontFamily: "RobotoMono",
-                    ),
-                  ),
-                  Text(
-                    "chic",
-                    style: TextStyle(
-                      fontSize: 30,
-                      color: Colors.pink,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(left: 10),
-              width: 250,
-              height: 40,
-              child: TextField(
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => SearchScreen()));
-                },
-                style: TextStyle(color: Colors.white),
-                obscureText: true,
-                decoration: InputDecoration(
-                  labelStyle: TextStyle(color: Colors.grey),
-                  contentPadding: EdgeInsets.all(5),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30.0),
-                  ),
-                  labelText: 'Password',
-                  prefixIcon: IconButton(
-                    onPressed: null,
-                    icon: Icon(Icons.search),
-                  ),
-                ),
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
   Widget buildTapBar(int index) {
     Size size = MediaQuery.of(context).size;
     final args = ModalRoute.of(context).settings.arguments as int;
@@ -164,27 +100,26 @@ class _BodyState extends State<Body> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => HomeScreen(),
+                builder: (context) => MenScreen(),
                 settings: RouteSettings(
                   arguments: selectedIndex,
                 ),
               ),
             );
           }
-
-          if (selectedIndex == 2) {
+          if (selectedIndex == 1) {
+            print(1);
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => ArmyScreen(),
+                builder: (context) => WomenScreen(),
                 settings: RouteSettings(
-                  arguments: selectedIndex,
+                  arguments: 1,
                 ),
               ),
             );
           }
-
-          if (selectedIndex == 3) {
+          if (selectedIndex == 2) {
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -206,14 +141,14 @@ class _BodyState extends State<Body> {
               categories[index],
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                color: selectedIndex == index ? Colors.red : KTextLightColor,
+                color: selectedIndex == 1 ? Colors.red : KTextLightColor,
               ),
             ),
             Container(
               margin: const EdgeInsets.only(top: KDefaultPadding / 4),
               height: 2,
               width: 30,
-              color: selectedIndex == index ? Colors.black : Colors.transparent,
+              color: selectedIndex == 1 ? Colors.black : Colors.transparent,
             ),
           ],
         ),
@@ -221,7 +156,6 @@ class _BodyState extends State<Body> {
     );
   }
 
-  int selectedIndex = 0;
   Widget builBannerWOMEN(BuildContext context) {
     return Container(
       alignment: Alignment.center,
@@ -258,85 +192,85 @@ class _BodyState extends State<Body> {
       ),
     );
   }
-
-  Positioned bottom_bar(Size size) {
-    return new Positioned(
-      bottom: 0,
-      child: Container(
-        width: size.width,
-        height: 60,
-        color: Colors.white,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            IconButton(
-              onPressed: () {
-                setState(() {
-                  selectedIndex = 0;
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => HomeScreen(),
-                    ),
-                  );
-                });
-              },
-              icon: Icon(Icons.home),
-              iconSize: 30,
-              color: selectedIndex == 0 ? Colors.pink : Colors.black,
-            ),
-            IconButton(
-              icon: Icon(Icons.category_outlined),
-              onPressed: () {
-                setState(() {
-                  selectedIndex = 1;
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => CategoryScreen(),
-                      settings: RouteSettings(
-                        arguments: selectedIndex,
-                      ),
-                    ),
-                  );
-                });
-              },
-              color: selectedIndex == 1 ? Colors.pink : Colors.black,
-              iconSize: 30,
-            ),
-            IconButton(
-              onPressed: () {
-                setState(() {
-                  selectedIndex = 2;
-                });
-              },
-              icon: Icon(Icons.whatshot_outlined),
-              iconSize: 30,
-              color: selectedIndex == 2 ? Colors.pink : Colors.black,
-            ),
-            IconButton(
-              onPressed: () {
-                setState(() {
-                  selectedIndex = 3;
-                });
-              },
-              icon: Icon(Icons.chat_bubble_outline),
-              iconSize: 30,
-              color: selectedIndex == 3 ? Colors.pink : Colors.black,
-            ),
-            IconButton(
-              onPressed: () {
-                setState(() {
-                  selectedIndex = 4;
-                });
-              },
-              icon: Icon(Icons.person_outline),
-              iconSize: 30,
-              color: selectedIndex == 4 ? Colors.pink : Colors.black,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+//  int bottomBar_index = 0;
+//   Positioned bottom_bar(Size size) {
+//     return new Positioned(
+//       bottom: 0,
+//       child: Container(
+//         width: size.width,
+//         height: 60,
+//         color: Colors.white,
+//         child: Row(
+//           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//           children: <Widget>[
+//             IconButton(
+//               onPressed: () {
+//                 setState(() {
+//                   bottomBar_index = 0;
+//                   Navigator.push(
+//                     context,
+//                     MaterialPageRoute(
+//                       builder: (context) => HomeScreen(),
+//                     ),
+//                   );
+//                 });
+//               },
+//               icon: Icon(Icons.home),
+//               iconSize: 30,
+//               color: bottomBar_index == 0 ? Colors.pink : Colors.black,
+//             ),
+//             IconButton(
+//               icon: Icon(Icons.category_outlined),
+//               onPressed: () {
+//                 setState(() {
+//                   bottomBar_index = 1;
+//                   Navigator.push(
+//                     context,
+//                     MaterialPageRoute(
+//                       builder: (context) => CategoryScreen(),
+//                       settings: RouteSettings(
+//                         arguments: bottomBar_index,
+//                       ),
+//                     ),
+//                   );
+//                 });
+//               },
+//               color: bottomBar_index == 1 ? Colors.pink : Colors.black,
+//               iconSize: 30,
+//             ),
+//             IconButton(
+//               onPressed: () {
+//                 setState(() {
+//                   bottomBar_index = 2;
+//                 });
+//               },
+//               icon: Icon(Icons.shopping_cart_outlined),
+//               iconSize: 30,
+//               color: bottomBar_index == 2 ? Colors.pink : Colors.black,
+//             ),
+//             IconButton(
+//               onPressed: () {
+//                 setState(() {
+//                   bottomBar_index = 3;
+//                 });
+//               },
+//               icon: Icon(Icons.chat_bubble_outline),
+//               iconSize: 30,
+//               color: bottomBar_index == 3 ? Colors.pink : Colors.black,
+//             ),
+//             IconButton(
+//               onPressed: () {
+//                 setState(() {
+//                   bottomBar_index = 4;
+//                 });
+//               },
+//               icon: Icon(Icons.person_outline),
+//               iconSize: 30,
+//               color: bottomBar_index == 4 ? Colors.pink : Colors.black,
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
 }
