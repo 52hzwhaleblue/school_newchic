@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:onboarding_demo/models/home/categories/categories_model_MEN.dart';
 import 'package:onboarding_demo/models/MODEL_productMen.dart';
 import 'package:onboarding_demo/views/constants.dart';
-import 'package:onboarding_demo/views/home/home_screen.dart';
+import 'package:onboarding_demo/views/trang-chu/home_screen.dart';
 import 'package:onboarding_demo/views/trang-san-pham/Women/WomenScreen.dart';
-import 'package:onboarding_demo/views/home/components/bottom_navigation.dart';
 
 class CategoryScreen extends StatefulWidget {
   CategoryScreen({Key key}) : super(key: key);
@@ -90,7 +89,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 ),
               ),
             ),
-            bottom_bar(size),
+            // bottom_bar(size),
           ],
         ),
       ),

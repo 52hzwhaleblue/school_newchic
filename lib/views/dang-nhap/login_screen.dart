@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:onboarding_demo/views/login/components/body.dart';
+import 'package:onboarding_demo/views/dang-nhap/components/body.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key key}) : super(key: key);

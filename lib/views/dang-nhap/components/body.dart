@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-import 'package:onboarding_demo/views/login/components/google_facebook_logo.dart';
+import 'package:onboarding_demo/views/dang-nhap/components/google_facebook_logo.dart';
 
 import 'back_arrow.dart';
 import 'background.dart';

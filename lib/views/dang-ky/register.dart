@@ -1,7 +1,7 @@
 library welcome.dart;
 
 import 'package:flutter/material.dart';
-import '../login/login_screen.dart';
+import 'package:onboarding_demo/views/dang-nhap/login_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
   //const welcome({Key? key}) : super(key: key);

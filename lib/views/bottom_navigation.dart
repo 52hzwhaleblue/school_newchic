@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:onboarding_demo/views/Category_button_bar/category_screen.dart';
+import 'package:onboarding_demo/views/danh-muc-san-pham/category_screen.dart';
+import 'package:onboarding_demo/views/layout.dart';
 
-import 'package:onboarding_demo/views/home/home_screen.dart';
+import 'package:onboarding_demo/views/trang-san-pham/Men/MenScreen.dart';
 
 class Bottom_Navigation extends StatefulWidget {
   // này nè
@@ -24,7 +25,7 @@ class _Bottom_NavigationState extends State<Bottom_Navigation> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => HomeScreen(),
+            builder: (context) => Layout(),
             settings: RouteSettings(
               arguments: _selectedIndex,
             ),
@@ -67,6 +68,13 @@ class _Bottom_NavigationState extends State<Bottom_Navigation> {
             size: 25,
           ),
           label: "Category",
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(
+            Icons.shopping_cart_outlined,
+            size: 25,
+          ),
+          label: "Cart",
         ),
         BottomNavigationBarItem(
           icon: Icon(

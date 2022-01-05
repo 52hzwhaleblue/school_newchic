@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:onboarding_demo/views/SearchScreen.dart';
 import 'package:onboarding_demo/views/bottom_navigation.dart';
-import 'package:onboarding_demo/views/trang-san-pham/Army/components/body.dart';
+import 'package:onboarding_demo/views/trang-san-pham/Men/components/body.dart';
 
-class ArmyScreen extends StatefulWidget {
-  ArmyScreen({Key key}) : super(key: key);
+class MenScreen extends StatefulWidget {
+  MenScreen({Key key}) : super(key: key);
 
   @override
-  _ArmyScreenState createState() => _ArmyScreenState();
+  _MenScreenState createState() => _MenScreenState();
 }
 
-class _ArmyScreenState extends State<ArmyScreen> {
+class _MenScreenState extends State<MenScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
