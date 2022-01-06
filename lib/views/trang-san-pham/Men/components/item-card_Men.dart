@@ -20,7 +20,7 @@ class _item_cardState extends State<item_card_Men> {
   @override
   void initState() {
     super.initState();
-    NetworkRequest.fetchPosts().then((dataFromServe) {
+    NetworkRequest.fetchProductMen().then((dataFromServe) {
       setState(() {
         postData = dataFromServe;
       });
