@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:onboarding_demo/models/home/categories/categories_model_MEN.dart';
 import 'package:onboarding_demo/models/MODEL_productMen.dart';
 import 'package:onboarding_demo/views/constants.dart';
-import 'package:onboarding_demo/views/trang-chu/home_screen.dart';
+import 'package:onboarding_demo/views/trang-san-pham/Men/MenScreen.dart';
+
 import 'package:onboarding_demo/views/trang-san-pham/Women/WomenScreen.dart';
 
 class CategoryScreen extends StatefulWidget {
@@ -58,116 +59,29 @@ class _CategoryScreenState extends State<CategoryScreen> {
     Size size = MediaQuery.of(context).size;
     return MaterialApp(
       home: Scaffold(
-        body: Stack(
-          children: [
-            Positioned(
-              child: SingleChildScrollView(
-                child: new Positioned(
-                  child: Column(
-                    children: [
-                      search_bar(),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: KDefaultPadding),
-                        child: SizedBox(
-                          height: 25,
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: categories.length,
-                            itemBuilder: (context, index) => buildTapBar(index),
-                          ),
-                        ),
-                      ),
-                      Row(
-                        children: [
-                          left(size),
-                          right(size),
-                        ],
-                      ),
-                    ],
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              search_bar(),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: KDefaultPadding),
+                child: SizedBox(
+                  height: 25,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: categories.length,
+                    itemBuilder: (context, index) => buildTapBar(index),
                   ),
                 ),
               ),
-            ),
-            // bottom_bar(size),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Positioned bottom_bar(Size size) {
-    final args = ModalRoute.of(context).settings.arguments as int;
-    int selectedIndex = args;
-    return new Positioned(
-      bottom: 0,
-      child: Container(
-        width: size.width,
-        height: 60,
-        color: Colors.white,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            IconButton(
-              onPressed: () {
-                setState(() {
-                  selectedIndex = 0;
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => HomeScreen(),
-                      settings: RouteSettings(
-                        arguments: selectedIndex,
-                      ),
-                    ),
-                  );
-                });
-              },
-              icon: Icon(Icons.home),
-              iconSize: 30,
-              color: selectedIndex == 0 ? Colors.pink : Colors.black,
-            ),
-            IconButton(
-              icon: Icon(Icons.category_outlined),
-              onPressed: () {
-                setState(() {
-                  selectedIndex = 1;
-                });
-              },
-              color: selectedIndex == 1 ? Colors.pink : Colors.black,
-              iconSize: 30,
-            ),
-            IconButton(
-              onPressed: () {
-                setState(() {
-                  selectedIndex = 2;
-                });
-              },
-              icon: Icon(Icons.whatshot_outlined),
-              iconSize: 30,
-              color: selectedIndex == 2 ? Colors.pink : Colors.black,
-            ),
-            IconButton(
-              onPressed: () {
-                setState(() {
-                  selectedIndex = 3;
-                });
-              },
-              icon: Icon(Icons.chat_bubble_outline),
-              iconSize: 30,
-              color: selectedIndex == 3 ? Colors.pink : Colors.black,
-            ),
-            IconButton(
-              onPressed: () {
-                setState(() {
-                  selectedIndex = 4;
-                });
-              },
-              icon: Icon(Icons.person_outline),
-              iconSize: 30,
-              color: selectedIndex == 4 ? Colors.pink : Colors.black,
-            ),
-          ],
+              Row(
+                children: [
+                  left(size),
+                  right(size),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -6,6 +6,7 @@ import 'package:onboarding_demo/models/home/banner/WOMEN/MODEL_banner_WOMEN.dart
 import 'package:onboarding_demo/views/loai-san-pham/Categoies_List_Women.dart';
 
 import 'package:onboarding_demo/views/constants.dart';
+import 'package:onboarding_demo/views/trang-san-pham/Army/components/body.dart';
 import 'package:onboarding_demo/views/trang-san-pham/Men/MenScreen.dart';
 import 'package:onboarding_demo/views/trang-san-pham/Men/components/title.dart';
 import 'package:onboarding_demo/views/trang-san-pham/Women/WomenScreen.dart';
@@ -14,14 +15,14 @@ import 'package:onboarding_demo/views/trang-san-pham/Women/components/item-card_
 
 import 'package:onboarding_demo/views/trang-san-pham/Army/ArmyScreen.dart';
 
-class Body extends StatefulWidget {
-  Body({Key key}) : super(key: key);
+class BodyWomen extends StatefulWidget {
+  BodyWomen({Key key}) : super(key: key);
 
   @override
   _BodyState createState() => _BodyState();
 }
 
-class _BodyState extends State<Body> {
+class _BodyState extends State<BodyWomen> {
   final _controller = TextEditingController();
   int _currentMen = 0;
   int _currentWomen = 0;
@@ -96,6 +97,7 @@ class _BodyState extends State<Body> {
       onTap: () {
         setState(() {
           selectedIndex = index;
+
           if (selectedIndex == 0) {
             Navigator.push(
               context,
@@ -108,11 +110,10 @@ class _BodyState extends State<Body> {
             );
           }
           if (selectedIndex == 1) {
-            print(1);
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => WomenScreen(),
+                builder: (context) => BodyWomen(),
                 settings: RouteSettings(
                   arguments: 1,
                 ),
@@ -123,7 +124,7 @@ class _BodyState extends State<Body> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => ArmyScreen(),
+                builder: (context) => BodyArmy(),
                 settings: RouteSettings(
                   arguments: selectedIndex,
                 ),
@@ -141,14 +142,14 @@ class _BodyState extends State<Body> {
               categories[index],
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                color: selectedIndex == 1 ? Colors.red : KTextLightColor,
+                color: selectedIndex == index ? Colors.red : KTextLightColor,
               ),
             ),
             Container(
               margin: const EdgeInsets.only(top: KDefaultPadding / 4),
               height: 2,
               width: 30,
-              color: selectedIndex == 1 ? Colors.black : Colors.transparent,
+              color: selectedIndex == index ? Colors.black : Colors.transparent,
             ),
           ],
         ),
