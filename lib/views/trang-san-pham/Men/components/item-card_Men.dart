@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:onboarding_demo/models/MODEL_productMen.dart';
+import 'package:onboarding_demo/models/api-product/productMen.dart';
+import 'package:onboarding_demo/network/network_request.dart';
 
 class item_card_Men extends StatefulWidget {
   const item_card_Men({
@@ -14,6 +16,17 @@ class item_card_Men extends StatefulWidget {
 }
 
 class _item_cardState extends State<item_card_Men> {
+  List<api_productMen> postData = [];
+  @override
+  void initState() {
+    super.initState();
+    NetworkRequest.fetchPosts().then((dataFromServe) {
+      setState(() {
+        postData = dataFromServe;
+      });
+    });
+  }
+
   var listStatusIcons = List.filled(productMen.length, false);
   var favoriteProducts_List = <String>[''];
 
@@ -56,7 +69,7 @@ class _item_cardState extends State<item_card_Men> {
 
       child: GridView.builder(
           physics: NeverScrollableScrollPhysics(),
-          itemCount: productMen.length,
+          itemCount: postData.length,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2, // bề ngang
             childAspectRatio: 0.75,
@@ -70,7 +83,7 @@ class _item_cardState extends State<item_card_Men> {
                 width: widget.size.width * 0.45,
                 height: widget.size.height * 0.4,
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade300,
+                  color: Colors.grey.shade200,
                   borderRadius: BorderRadius.all(
                     Radius.circular(20),
                   ),
@@ -87,40 +100,52 @@ class _item_cardState extends State<item_card_Men> {
                     Container(
                       width: widget.size.width * 0.45,
                       height: 180,
-                      child: Image.asset(
-                        productMen[index].image,
-                        fit: BoxFit.contain,
+                      child: Image.network(
+                        '${postData[index].image}',
+                        fit: BoxFit.cover,
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          productMen[index].title,
-                          style: TextStyle(
-                            fontSize: 20,
-                          ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 8.0),
+                                child: Text(
+                                  ' ${postData[index].name}',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  setStatusIcon(index);
+                                });
+                              },
+                              icon: (getStatusIcon(index))
+                                  ? Icon(
+                                      Icons.favorite,
+                                      color: Colors.red,
+                                    )
+                                  : Icon(Icons.favorite_border_outlined),
+                            ),
+                          ],
                         ),
-                        IconButton(
-                            onPressed: () {
-                              setState(() {
-                                setStatusIcon(index);
-                              });
-                            },
-                            icon: (getStatusIcon(index))
-                                ? Icon(
-                                    Icons.favorite,
-                                    color: Colors.red,
-                                  )
-                                : Icon(Icons.favorite_border_outlined)),
                       ],
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 10),
                       child: Text(
-                        "\$${productMen[index].price}",
+                        '\$${postData[index].price}',
                         style: TextStyle(
                           fontSize: 20,
+                          color: Colors.pinkAccent[400],
                         ),
                       ),
                     ),

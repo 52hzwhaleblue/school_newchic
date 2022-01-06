@@ -173,7 +173,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                   ),
                   SizedBox(height: 20),
                   Text(
-                    productMen[index].title,
+                    productMen[index].name,
                     style: TextStyle(fontSize: 18, color: Colors.black),
                   ),
                 ],

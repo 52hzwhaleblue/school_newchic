@@ -76,10 +76,11 @@ class _LayoutState extends State<Layout> {
                 labelStyle: TextStyle(color: Colors.grey),
                 contentPadding: EdgeInsets.all(5),
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(30.0),
+                  borderRadius: BorderRadius.circular(50.0),
                 ),
                 labelText: 'Search',
                 prefixIcon: IconButton(
+                  enableFeedback: false,
                   onPressed: null,
                   icon: Icon(Icons.search),
                 ),
