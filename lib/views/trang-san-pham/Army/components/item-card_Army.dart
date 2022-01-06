@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:onboarding_demo/models/MODEL_productArmy.dart';
+import 'package:onboarding_demo/models/api-product/productArmy.dart';
+import 'package:onboarding_demo/network/network_request.dart';
 
 class item_card_Army extends StatefulWidget {
   const item_card_Army({
@@ -14,6 +16,17 @@ class item_card_Army extends StatefulWidget {
 }
 
 class _item_cardState extends State<item_card_Army> {
+  List<api_productArmy> productData = [];
+  @override
+  void initState() {
+    super.initState();
+    NetworkRequest.fetchProductArmy().then((dataFromServe) {
+      setState(() {
+        productData = dataFromServe;
+      });
+    });
+  }
+
   var listStatusIcons = List.filled(productArmy.length, false);
   var favoriteProducts_List = <String>[''];
 
@@ -44,17 +57,18 @@ class _item_cardState extends State<item_card_Army> {
         return listStatusIcons[i];
       }
     }
+    return false;
   }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
-      height: size.height * productArmy.length / 4.5,
+      height: size.height * productData.length / 4.5,
       width: size.width,
       child: GridView.builder(
           physics: NeverScrollableScrollPhysics(),
-          itemCount: productArmy.length,
+          itemCount: productData.length,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2, // bề ngang
             childAspectRatio: 0.75,
@@ -68,7 +82,7 @@ class _item_cardState extends State<item_card_Army> {
                 width: widget.size.width * 0.45,
                 height: widget.size.height * 0.4,
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade300,
+                  color: Colors.grey.shade200,
                   borderRadius: BorderRadius.all(
                     Radius.circular(20),
                   ),
@@ -80,23 +94,26 @@ class _item_cardState extends State<item_card_Army> {
                   ],
                 ),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
                       width: widget.size.width * 0.45,
                       height: 180,
-                      child: Image.asset(
-                        productArmy[index].image,
-                        fit: BoxFit.contain,
+                      child: Image.network(
+                        '${productData[index].image}',
+                        fit: BoxFit.cover,
                       ),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Text(
-                          productArmy[index].title,
-                          style: TextStyle(
-                            fontSize: 20,
+                        Expanded(
+                          child: Text(
+                            '${productData[index].name}',
+                            style: TextStyle(
+                              fontSize: 20,
+                            ),
                           ),
                         ),
                         IconButton(
@@ -116,9 +133,10 @@ class _item_cardState extends State<item_card_Army> {
                     Padding(
                       padding: const EdgeInsets.only(left: 10),
                       child: Text(
-                        "\$${productArmy[index].price}",
+                        '\$${productData[index].price}',
                         style: TextStyle(
                           fontSize: 20,
+                          color: Colors.pinkAccent[400],
                         ),
                       ),
                     ),

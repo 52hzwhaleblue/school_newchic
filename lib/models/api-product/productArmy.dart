@@ -1,4 +1,4 @@
-class api_productMen {
+class api_productArmy {
   int id;
   String name;
   int price;
@@ -7,7 +7,7 @@ class api_productMen {
   String type;
   bool status;
 
-  api_productMen({
+  api_productArmy({
     this.id,
     this.name,
     this.price,
@@ -17,7 +17,7 @@ class api_productMen {
     this.status,
   });
 
-  api_productMen.fromJson(Map<String, dynamic> json) {
+  api_productArmy.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     price = json['price'];

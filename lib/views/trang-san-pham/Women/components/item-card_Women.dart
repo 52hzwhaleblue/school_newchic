@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:onboarding_demo/models/MODEL_productwomen.dart';
+import 'package:onboarding_demo/models/api-product/productMen.dart';
+import 'package:onboarding_demo/models/api-product/productWomen.dart';
+import 'package:onboarding_demo/network/network_request.dart';
 
 class item_card_Women extends StatefulWidget {
   const item_card_Women({
@@ -15,6 +18,17 @@ class item_card_Women extends StatefulWidget {
 }
 
 class _item_cardState extends State<item_card_Women> {
+  List<api_productWomen> productData = [];
+  @override
+  void initState() {
+    super.initState();
+    NetworkRequest.fetchProductWomen().then((dataFromServe) {
+      setState(() {
+        productData = dataFromServe;
+      });
+    });
+  }
+
   var listStatusIcons = List.filled(productWomen.length, false);
   var favoriteProducts_List = <String>[''];
 
@@ -45,6 +59,7 @@ class _item_cardState extends State<item_card_Women> {
         return listStatusIcons[i];
       }
     }
+    return true;
   }
 
   @override
@@ -55,12 +70,12 @@ class _item_cardState extends State<item_card_Women> {
       width: size.width,
       child: GridView.builder(
           physics: NeverScrollableScrollPhysics(),
-          itemCount: productWomen.length,
+          itemCount: productData.length,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2, // bề ngang
             childAspectRatio: 0.75,
             mainAxisSpacing: 30, // khoảng cách trên dưới
-            crossAxisSpacing: 30,
+            crossAxisSpacing: 1,
           ),
           itemBuilder: (BuildContext context, index) {
             return Padding(
@@ -69,14 +84,14 @@ class _item_cardState extends State<item_card_Women> {
                 width: widget.size.width * 0.45,
                 height: widget.size.height * 0.4,
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade300,
+                  color: Colors.grey.shade200,
                   borderRadius: BorderRadius.all(
                     Radius.circular(20),
                   ),
                   boxShadow: [
                     BoxShadow(
                       offset: Offset(4, 6),
-                      color: Colors.grey.withOpacity(0.2),
+                      color: Colors.grey.withOpacity(0.5),
                     ),
                   ],
                 ),
@@ -86,40 +101,52 @@ class _item_cardState extends State<item_card_Women> {
                     Container(
                       width: widget.size.width * 0.45,
                       height: 180,
-                      child: Image.asset(
-                        productWomen[index].image,
-                        fit: BoxFit.contain,
+                      child: Image.network(
+                        '${productData[index].image}',
+                        fit: BoxFit.cover,
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          productWomen[index].title,
-                          style: TextStyle(
-                            fontSize: 20,
-                          ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 8.0),
+                                child: Text(
+                                  ' ${productData[index].name}',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  setStatusIcon(index);
+                                });
+                              },
+                              icon: (getStatusIcon(index))
+                                  ? Icon(
+                                      Icons.favorite,
+                                      color: Colors.red,
+                                    )
+                                  : Icon(Icons.favorite_border_outlined),
+                            ),
+                          ],
                         ),
-                        IconButton(
-                            onPressed: () {
-                              setState(() {
-                                setStatusIcon(index);
-                              });
-                            },
-                            icon: (getStatusIcon(index))
-                                ? Icon(
-                                    Icons.favorite,
-                                    color: Colors.red,
-                                  )
-                                : Icon(Icons.favorite_border_outlined)),
                       ],
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 10),
                       child: Text(
-                        "\$${productWomen[index].price}",
+                        '\$${productData[index].price}',
                         style: TextStyle(
                           fontSize: 20,
+                          color: Colors.pinkAccent[400],
                         ),
                       ),
                     ),
