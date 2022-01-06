@@ -17,7 +17,7 @@ class _ArmyScreenState extends State<ArmyScreen> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: Body(),
+        body: BodyArmy(),
       ),
     );
   }

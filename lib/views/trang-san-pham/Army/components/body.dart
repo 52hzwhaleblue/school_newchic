@@ -6,21 +6,23 @@ import 'package:onboarding_demo/views/SearchScreen.dart';
 
 import 'package:onboarding_demo/views/trang-san-pham/Army/ArmyScreen.dart';
 import 'package:onboarding_demo/views/trang-san-pham/Men/MenScreen.dart';
+import 'package:onboarding_demo/views/trang-san-pham/Men/components/body.dart';
 import 'package:onboarding_demo/views/trang-san-pham/Men/components/title.dart';
 import 'package:onboarding_demo/views/trang-san-pham/Women/WomenScreen.dart';
 import 'package:onboarding_demo/views/loai-san-pham/Categoies_List_Army.dart';
 
 import 'package:onboarding_demo/views/constants.dart';
 import 'package:onboarding_demo/views/trang-san-pham/Army/components/item-card_Army.dart';
+import 'package:onboarding_demo/views/trang-san-pham/Women/components/body.dart';
 
-class Body extends StatefulWidget {
-  Body({Key key}) : super(key: key);
+class BodyArmy extends StatefulWidget {
+  BodyArmy({Key key}) : super(key: key);
 
   @override
   _BodyState createState() => _BodyState();
 }
 
-class _BodyState extends State<Body> {
+class _BodyState extends State<BodyArmy> {
   final _controller = TextEditingController();
   int _currentMen = 0;
   int _currentWomen = 0;
@@ -163,7 +165,7 @@ class _BodyState extends State<Body> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => MenScreen(),
+                builder: (context) => BodyMen(),
                 settings: RouteSettings(
                   arguments: selectedIndex,
                 ),
@@ -174,7 +176,7 @@ class _BodyState extends State<Body> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => WomenScreen(),
+                builder: (context) => BodyWomen(),
                 settings: RouteSettings(
                   arguments: selectedIndex,
                 ),
@@ -183,10 +185,11 @@ class _BodyState extends State<Body> {
           }
 
           if (selectedIndex == 2) {
+            print(index);
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => ArmyScreen(),
+                builder: (context) => BodyArmy(),
                 settings: RouteSettings(
                   arguments: selectedIndex,
                 ),

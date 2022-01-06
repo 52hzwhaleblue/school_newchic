@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:onboarding_demo/views/trang-chu/home_screen.dart';
+import 'package:onboarding_demo/views/trang-san-pham/Men/MenScreen.dart';
 
 class login_button extends StatelessWidget {
   const login_button({
@@ -14,7 +14,7 @@ class login_button extends StatelessWidget {
         minWidth: double.maxFinite,
         onPressed: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => HomeScreen()));
+              context, MaterialPageRoute(builder: (context) => MenScreen()));
         },
         child: Text(
           "LOGIN",

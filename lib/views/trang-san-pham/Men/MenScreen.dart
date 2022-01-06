@@ -17,7 +17,7 @@ class _MenScreenState extends State<MenScreen> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: Body(),
+        body: BodyMen(),
       ),
     );
   }

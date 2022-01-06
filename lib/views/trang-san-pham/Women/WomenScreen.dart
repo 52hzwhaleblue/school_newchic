@@ -19,7 +19,7 @@ class _WomenScreenState extends State<WomenScreen> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: Body(),
+        body: BodyWomen(),
       ),
     );
   }
