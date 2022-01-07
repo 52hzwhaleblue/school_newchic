@@ -1,7 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:onboarding_demo/models/MODEL_productMen.dart';
 import 'package:onboarding_demo/models/api-product/productMen.dart';
+import 'package:onboarding_demo/models/cart_api.dart';
 import 'package:onboarding_demo/network/network_request.dart';
+import 'package:onboarding_demo/views/constants.dart';
+import 'dart:convert';
+
+import 'package:http/http.dart' as http;
 
 class item_card_Men extends StatefulWidget {
   const item_card_Men({
@@ -16,6 +23,8 @@ class item_card_Men extends StatefulWidget {
 }
 
 class _item_cardState extends State<item_card_Men> {
+  Future<Cart_API> _futurecart;
+
   List<api_productMen> postData = [];
   @override
   void initState() {
@@ -28,7 +37,7 @@ class _item_cardState extends State<item_card_Men> {
   }
 
   var listStatusIcons = List.filled(productMen.length, false);
-  var favoriteProducts_List = <String>[''];
+  List favoriteProducts_List = [];
 
   bool isRemoved = false;
 
@@ -40,10 +49,11 @@ class _item_cardState extends State<item_card_Men> {
         if (listStatusIcons[i]) {
           // gán icon = false, icon true thì remove icon đi,
           listStatusIcons[i] = false;
+          favoriteProducts_List.removeAt(i);
         } else {
           // nếu trạng thái icon false -> add vào yêu thích
           listStatusIcons[i] = true;
-          //favoriteProducts_List.add(favoriteProducts_List[index]);
+          favoriteProducts_List.add(listStatusIcons[index]);
         }
         break;
       }
@@ -57,11 +67,53 @@ class _item_cardState extends State<item_card_Men> {
         return listStatusIcons[i];
       }
     }
+
+    for (var i = 0; i < favoriteProducts_List.length; i++) {
+      if (i == index) {
+        return favoriteProducts_List[i];
+      }
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    FutureBuilder<Cart_API>(
+      future: _futurecart,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Text(snapshot.data.productName);
+        } else if (snapshot.hasError) {
+          return Text('${snapshot.error}');
+        }
+
+        return const CircularProgressIndicator();
+      },
+    );
+
+    Future<Cart_API> createCart(String productName, int price) async {
+      final response = await http.post(
+        Uri.parse('http://192.168.1.220:3000/cart'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, dynamic>{
+          'Product Name': productName,
+          'Price': price,
+        }),
+      );
+
+      if (response.statusCode == 201) {
+        // If the server did return a 201 CREATED response,
+        // then parse the JSON.
+        return Cart_API.fromJson(jsonDecode(response.body));
+      } else {
+        // If the server did not return a 201 CREATED response,
+        // then throw an exception.
+        throw Exception('Failed to create album.');
+      }
+    }
+
     return Container(
       // padding: EdgeInsets.only(right: 5),
       height: size.height * productMen.length / 4.5,
@@ -126,6 +178,16 @@ class _item_cardState extends State<item_card_Men> {
                               onPressed: () {
                                 setState(() {
                                   setStatusIcon(index);
+                                  productName_buy = '${postData[index].name}';
+                                  productPrice_buy = '${postData[index].price}';
+                                  int.parse(productPrice_buy);
+
+                                  _futurecart = createCart(
+                                    productName_buy,
+                                    int.parse(productPrice_buy),
+                                  );
+                                  print(
+                                      "TÊn sp: $productName_buy và giá: $productPrice_buy");
                                 });
                               },
                               icon: (getStatusIcon(index))

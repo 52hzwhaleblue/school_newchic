@@ -28,7 +28,7 @@ class _item_cardState extends State<item_card_Army> {
   }
 
   var listStatusIcons = List.filled(productArmy.length, false);
-  var favoriteProducts_List = <String>[''];
+  List favoriteProducts_List = [];
 
   bool isRemoved = false;
 

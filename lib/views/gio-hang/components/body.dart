@@ -2,6 +2,11 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:onboarding_demo/models/MODEL_productMen.dart';
+import 'package:onboarding_demo/models/api-product/productMen.dart';
+import 'package:onboarding_demo/models/cart_api.dart';
+import 'package:onboarding_demo/network/cart_request.dart';
+import 'package:onboarding_demo/network/network_request.dart';
+import 'package:onboarding_demo/views/constants.dart';
 import 'package:onboarding_demo/views/dang-nhap/components/back_arrow.dart';
 
 class Body extends StatefulWidget {
@@ -12,6 +17,17 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
+  List<Cart_API> cartData = [];
+  @override
+  void initState() {
+    super.initState();
+    CartRequest.fetchCart().then((dataFromServe) {
+      setState(() {
+        cartData = dataFromServe;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -113,7 +129,7 @@ class _BodyState extends State<Body> {
                                   onPressed: null,
                                   icon: Icon(
                                     Icons.delete_outline,
-                                    color: Colors.black,
+                                    color: Colors.red,
                                     size: 30,
                                   ),
                                 ),
@@ -128,66 +144,71 @@ class _BodyState extends State<Body> {
                           SizedBox(
                             height: 20,
                           ),
-                          Expanded(
-                            child: Container(
-                              child: ListView.builder(
-                                itemCount: 2,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Checkbox(
-                                              value: false, onChanged: null),
-                                          Container(
-                                            width: 100,
-                                            height: 100,
-                                            child: Image.asset(
-                                              productMen[0].image,
-                                              fit: BoxFit.contain,
-                                            ),
+                          Container(
+                            height: size.height,
+                            child: ListView.builder(
+                              itemCount: cartData.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Checkbox(value: false, onChanged: null),
+                                        Container(
+                                          width: 100,
+                                          height: 100,
+                                          child: Image.asset(
+                                            productMen[0].image,
+                                            fit: BoxFit.contain,
                                           ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 10, bottom: 40),
-                                            child: Row(
-                                              children: [
-                                                Column(
-                                                  children: [
-                                                    Text(
-                                                      "Tên sản phẩm",
-                                                      style: TextStyle(
-                                                          fontSize: 20),
-                                                    ),
-                                                    Text(
-                                                      "Giá sản phẩm",
-                                                      style: TextStyle(
-                                                          fontSize: 20),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 10, bottom: 40),
+                                          child: Row(
+                                            children: [
+                                              Column(
+                                                children: [
+                                                  Text(
+                                                    (cartData[index]
+                                                                .productName ==
+                                                            null)
+                                                        ? ""
+                                                        : '${cartData[index].productName}',
+                                                    style:
+                                                        TextStyle(fontSize: 20),
+                                                  ),
+                                                  Text(
+                                                    (cartData[index].price ==
+                                                            null)
+                                                        ? ""
+                                                        : '${cartData[index].price}',
+                                                    style:
+                                                        TextStyle(fontSize: 20),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
                                           ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                              left: 70,
-                                              top: 60,
-                                            ),
-                                            child: Text(
-                                              "Xóa",
-                                              style: TextStyle(
-                                                  fontSize: 20,
-                                                  color: Colors.blue),
-                                            ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                            left: 70,
+                                            top: 60,
                                           ),
-                                        ],
-                                      ),
-                                    ],
-                                  );
-                                },
-                              ),
+                                          child: Text(
+                                            "Xóa",
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                color: Colors.blue),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                );
+                              },
                             ),
                           ),
                         ],

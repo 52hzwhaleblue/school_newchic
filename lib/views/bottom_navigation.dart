@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:onboarding_demo/views/danh-muc-san-pham/category_screen.dart';
+import 'package:onboarding_demo/views/gio-hang/cart_screen.dart';
 import 'package:onboarding_demo/views/layout.dart';
 
 import 'package:onboarding_demo/views/trang-san-pham/Men/MenScreen.dart';
@@ -39,6 +40,17 @@ class _Bottom_NavigationState extends State<Bottom_Navigation> {
             builder: (context) => CategoryScreen(),
             settings: RouteSettings(
               arguments: 1,
+            ),
+          ),
+        );
+      }
+      if (_selectedIndex == 2) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => CartScreen(),
+            settings: RouteSettings(
+              arguments: _selectedIndex,
             ),
           ),
         );
