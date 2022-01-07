@@ -14,3 +14,6 @@ bool isCliked_Women = false;
 bool isCliked_Army = false;
 
 bool isDisableButton_army = true;
+
+var productName_buy;
+var productPrice_buy;
