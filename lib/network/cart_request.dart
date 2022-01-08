@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:onboarding_demo/models/cart_api.dart';
 
 class CartRequest {
-  static const String urlCart = "http://192.168.1.220:3000/cart";
+  static const String urlCart = "http://172.22.128.1:3000/cart";
   // men
   static List<Cart_API> parseProductMen(String responseBody) {
     var list = json.decode(responseBody) as List<dynamic>;
