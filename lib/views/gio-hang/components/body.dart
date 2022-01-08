@@ -171,19 +171,12 @@ class _BodyState extends State<Body> {
                                               Column(
                                                 children: [
                                                   Text(
-                                                    (cartData[index]
-                                                                .productName ==
-                                                            null)
-                                                        ? ""
-                                                        : '${cartData[index].productName}',
+                                                    '${cartData[index].productName}',
                                                     style:
                                                         TextStyle(fontSize: 20),
                                                   ),
                                                   Text(
-                                                    (cartData[index].price ==
-                                                            null)
-                                                        ? ""
-                                                        : '${cartData[index].price}',
+                                                    '${cartData[index].price}',
                                                     style:
                                                         TextStyle(fontSize: 20),
                                                   ),

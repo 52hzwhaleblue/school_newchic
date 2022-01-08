@@ -93,7 +93,7 @@ class _item_cardState extends State<item_card_Men> {
 
     Future<Cart_API> createCart(String productName, int price) async {
       final response = await http.post(
-        Uri.parse('http://192.168.1.220:3000/cart'),
+        Uri.parse('http://172.22.128.1:3000/cart'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },

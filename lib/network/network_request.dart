@@ -6,10 +6,10 @@ import 'package:onboarding_demo/models/api-product/productMen.dart';
 import 'package:onboarding_demo/models/api-product/productWomen.dart';
 
 class NetworkRequest {
-  static const String urlProductMen = "http://192.168.1.220:3000/productsMen";
+  static const String urlProductMen = "http://172.22.128.1:3000/productsMen";
   static const String urlProductWomen =
-      "http://192.168.1.220:3000/productsWomen";
-  static const String urlProductArmy = "http://192.168.1.220:3000/productsArmy";
+      "http://172.22.128.1:3000/productsWomen";
+  static const String urlProductArmy = "http://172.22.128.1:3000/productsArmy";
 
 // men
   static List<api_productMen> parseProductMen(String responseBody) {
