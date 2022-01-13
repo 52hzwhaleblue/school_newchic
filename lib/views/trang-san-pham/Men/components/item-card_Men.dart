@@ -25,13 +25,13 @@ class item_card_Men extends StatefulWidget {
 class _item_cardState extends State<item_card_Men> {
   Future<Cart_API> _futurecart;
 
-  List<api_productMen> postData = [];
+  List<api_productMen> productMenData = [];
   @override
   void initState() {
     super.initState();
     NetworkRequest.fetchProductMen().then((dataFromServe) {
       setState(() {
-        postData = dataFromServe;
+        productMenData = dataFromServe;
       });
     });
   }
@@ -91,15 +91,17 @@ class _item_cardState extends State<item_card_Men> {
       },
     );
 
-    Future<Cart_API> createCart(String productName, int price) async {
+    Future<Cart_API> createCart(
+        String productName, int price, String image) async {
       final response = await http.post(
-        Uri.parse('http://172.22.128.1:3000/cart'),
+        Uri.parse('http://192.168.1.220:3000/cart'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
         body: jsonEncode(<String, dynamic>{
           'Product Name': productName,
           'Price': price,
+          'Image': image,
         }),
       );
 
@@ -110,7 +112,7 @@ class _item_cardState extends State<item_card_Men> {
       } else {
         // If the server did not return a 201 CREATED response,
         // then throw an exception.
-        throw Exception('Failed to create album.');
+        throw Exception('Failed to create cart.');
       }
     }
 
@@ -121,7 +123,7 @@ class _item_cardState extends State<item_card_Men> {
 
       child: GridView.builder(
           physics: NeverScrollableScrollPhysics(),
-          itemCount: postData.length,
+          itemCount: productMenData.length,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2, // bề ngang
             childAspectRatio: 0.75,
@@ -153,7 +155,7 @@ class _item_cardState extends State<item_card_Men> {
                       width: widget.size.width * 0.45,
                       height: 180,
                       child: Image.network(
-                        '${postData[index].image}',
+                        '${productMenData[index].image}',
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -167,7 +169,7 @@ class _item_cardState extends State<item_card_Men> {
                               child: Padding(
                                 padding: const EdgeInsets.only(left: 8.0),
                                 child: Text(
-                                  ' ${postData[index].name}',
+                                  ' ${productMenData[index].name}',
                                   style: TextStyle(
                                     fontSize: 20,
                                   ),
@@ -178,13 +180,18 @@ class _item_cardState extends State<item_card_Men> {
                               onPressed: () {
                                 setState(() {
                                   setStatusIcon(index);
-                                  productName_buy = '${postData[index].name}';
-                                  productPrice_buy = '${postData[index].price}';
+                                  productName_buy =
+                                      '${productMenData[index].name}';
+                                  productPrice_buy =
+                                      '${productMenData[index].price}';
+                                  productImage_buy =
+                                      '${productMenData[index].image}';
                                   int.parse(productPrice_buy);
 
                                   _futurecart = createCart(
                                     productName_buy,
                                     int.parse(productPrice_buy),
+                                    productImage_buy,
                                   );
                                   print(
                                       "TÊn sp: $productName_buy và giá: $productPrice_buy");
@@ -204,7 +211,7 @@ class _item_cardState extends State<item_card_Men> {
                     Padding(
                       padding: const EdgeInsets.only(left: 10),
                       child: Text(
-                        '\$${postData[index].price}',
+                        '\$${productMenData[index].price}',
                         style: TextStyle(
                           fontSize: 20,
                           color: Colors.pinkAccent[400],
