@@ -17,3 +17,4 @@ bool isDisableButton_army = true;
 
 var productName_buy;
 var productPrice_buy;
+var productImage_buy;
