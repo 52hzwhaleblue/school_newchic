@@ -92,7 +92,7 @@ class _item_cardState extends State<item_card_Men> {
     );
 
     Future<Cart_API> createCart(
-        String productName, int price, String image) async {
+        String productName, int price, String image, int quantity) async {
       final response = await http.post(
         Uri.parse('http://192.168.1.220:3000/cart'),
         headers: <String, String>{
@@ -102,6 +102,7 @@ class _item_cardState extends State<item_card_Men> {
           'Product Name': productName,
           'Price': price,
           'Image': image,
+          'Quantity': quantity,
         }),
       );
 
@@ -187,14 +188,15 @@ class _item_cardState extends State<item_card_Men> {
                                   productImage_buy =
                                       '${productMenData[index].image}';
                                   int.parse(productPrice_buy);
+                                  quantity_buy = 1;
 
                                   _futurecart = createCart(
                                     productName_buy,
                                     int.parse(productPrice_buy),
                                     productImage_buy,
+                                    quantity_buy,
                                   );
-                                  print(
-                                      "TÊn sp: $productName_buy và giá: $productPrice_buy");
+                                  print(productMenData[index].quantity);
                                 });
                               },
                               icon: (getStatusIcon(index))

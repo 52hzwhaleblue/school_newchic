@@ -1,3 +1,4 @@
+// ignore: camel_case_types
 class api_productArmy {
   int id;
   String name;

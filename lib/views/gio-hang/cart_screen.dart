@@ -1,7 +1,7 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
+
 import 'package:onboarding_demo/views/gio-hang/components/body.dart';
+import 'package:onboarding_demo/views/gio-hang/components/bottom_nav_cart.dart';
 
 class CartScreen extends StatefulWidget {
   CartScreen({Key key}) : super(key: key);
@@ -35,6 +35,7 @@ class _CartScreenState extends State<CartScreen> {
           ),
         ),
         body: Body(),
+        bottomNavigationBar: Bottom_Nav_Cart(),
       ),
     );
   }

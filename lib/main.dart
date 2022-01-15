@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:onboarding_demo/views/gio-hang/cart_screen.dart';
 import 'package:onboarding_demo/views/layout.dart';
 
 import 'package:firebase_core/firebase_core.dart';
