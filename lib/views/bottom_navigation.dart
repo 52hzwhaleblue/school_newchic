@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'package:flutter/material.dart';
 import 'package:onboarding_demo/views/danh-muc-san-pham/category_screen.dart';
 import 'package:onboarding_demo/views/gio-hang/cart_screen.dart';

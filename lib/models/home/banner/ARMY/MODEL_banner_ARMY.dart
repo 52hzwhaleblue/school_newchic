@@ -1,3 +1,4 @@
+// ignore: camel_case_types
 class BannerModel_ARMY {
   String image;
 

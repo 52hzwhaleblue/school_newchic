@@ -18,3 +18,10 @@ bool isDisableButton_army = true;
 var productName_buy;
 var productPrice_buy;
 var productImage_buy;
+var quantity_buy;
+
+bool allCheck = false;
+
+// số lượng gio3san3 phẩm trong giỏ hàng
+var itemsQuantity = 1;
+var totalCart = 0;
