@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:onboarding_demo/views/SearchScreen.dart';
 import 'package:onboarding_demo/views/bottom_navigation.dart';
+import 'package:onboarding_demo/views/gio-hang/cart_screen.dart';
 
 import 'package:onboarding_demo/views/trang-san-pham/Men/MenScreen.dart';
+import 'package:badges/badges.dart';
 
 class Layout extends StatefulWidget {
   Layout({Key key}) : super(key: key);
@@ -40,7 +42,7 @@ class _LayoutState extends State<Layout> {
                   Text(
                     "New",
                     style: TextStyle(
-                      fontSize: 30,
+                      fontSize: 26,
                       fontFamily: "RobotoMono",
                       color: Colors.black,
                     ),
@@ -48,7 +50,7 @@ class _LayoutState extends State<Layout> {
                   Text(
                     "chic",
                     style: TextStyle(
-                      fontSize: 30,
+                      fontSize: 26,
                       color: Colors.pink,
                     ),
                   ),
@@ -60,7 +62,7 @@ class _LayoutState extends State<Layout> {
       ),
       actions: [
         Padding(
-          padding: const EdgeInsets.only(top: 10, right: 10),
+          padding: const EdgeInsets.only(top: 10),
           child: Container(
             margin: EdgeInsets.only(left: 10),
             width: 250,
@@ -87,7 +89,29 @@ class _LayoutState extends State<Layout> {
               ),
             ),
           ),
-        )
+        ),
+        Badge(
+          position: BadgePosition.topEnd(top: 10, end: 10),
+          badgeContent: Text(
+            '9',
+            style: TextStyle(color: Colors.white, fontSize: 10),
+          ),
+          child: IconButton(
+            icon: Icon(
+              Icons.add_shopping_cart,
+              color: Colors.grey,
+              size: 32,
+            ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CartScreen(),
+                ),
+              );
+            },
+          ),
+        ),
       ],
     );
   }

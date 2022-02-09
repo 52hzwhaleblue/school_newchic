@@ -15,13 +15,31 @@ bool isCliked_Army = false;
 
 bool isDisableButton_army = true;
 
-var productName_buy;
-var productPrice_buy;
-var productImage_buy;
-var quantity_buy;
+// khi user nhấn mua hàng, thêm thông tin sản phẩm vào giỏ hàng
+var productID_cart;
+var productName_cart;
+var productPrice_cart;
+var productImage_cart;
+var quantity_cart;
+var sub_total_cart;
+var isAdd;
+
+var product_status = true;
+var product_type;
+var quantity_product;
+
+// khi sản phẩm đã có trong giỏ hàng, cập nhật trạng thái sản phẩm = true (default = false)
 
 bool allCheck = false;
 
-// số lượng gio3san3 phẩm trong giỏ hàng
+// số lượng sản  phẩm trong giỏ hàng
 var itemsQuantity = 1;
 var totalCart = 0;
+
+var i1;
+var i2;
+var i3;
+var i4;
+var i5;
+var i6;
+var i7;
