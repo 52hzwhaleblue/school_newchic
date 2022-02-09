@@ -52,7 +52,7 @@ flutter:
   fonts:
     - family: Inter
       fonts: 
-       - asset: assets/font/Inter/statiI/Inter-Regular.ttf
+       - asset: assets/font/Inter/static/Inter-Regular.ttf
        - asset: assets/font/Inter/static/Inter-Bold.ttf
          style: italic
   uses-material-design: true
