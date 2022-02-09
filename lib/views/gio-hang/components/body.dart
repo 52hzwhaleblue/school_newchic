@@ -1,15 +1,13 @@
 // import 'dart:html';
+import 'dart:convert';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:onboarding_demo/models/MODEL_productMen.dart';
-import 'package:onboarding_demo/models/api-product/productMen.dart';
 import 'package:onboarding_demo/models/cart_api.dart';
 import 'package:onboarding_demo/network/cart_request.dart';
-import 'package:onboarding_demo/network/network_request.dart';
 import 'package:onboarding_demo/views/constants.dart';
-import 'package:onboarding_demo/views/dang-nhap/components/back_arrow.dart';
 import 'package:onboarding_demo/views/gio-hang/components/user_info.dart';
+import 'package:http/http.dart' as http;
 
 class Body extends StatefulWidget {
   Body({Key key}) : super(key: key);
@@ -19,10 +17,11 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
-  final allChecked = checkBoxModal(title: "Tất cả sản phẩm");
+  final allChecked = checkBoxModal();
 
   var total = 0;
   List<Cart_API> cartData = [];
+  Future<Cart_API> _futurecart;
 
   @override
   void initState() {
@@ -40,9 +39,18 @@ class _BodyState extends State<Body> {
 
   @override
   Widget build(BuildContext context) {
-    bool isChecked = false;
     Size size = MediaQuery.of(context).size;
-
+    FutureBuilder<Cart_API>(
+      future: _futurecart,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Text(snapshot.data.productName);
+        } else if (snapshot.hasError) {
+          return Text('${snapshot.error}');
+        }
+        return const CircularProgressIndicator();
+      },
+    );
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Container(
@@ -115,22 +123,37 @@ class _BodyState extends State<Body> {
   }
 
   Container itemCarts(Size size) {
-    void checkStatus(int index) {
-      for (var i = 0; i < cartData.length; i++) {
-        if (i == index) {
-          _checks[index] = true;
-        } else {
-          _checks[index] = false;
-        }
-        break;
-      }
-    }
-
     getStatusIcon(var index) {
       for (var i = 0; i < cartData.length; i++) {
         if (i == index) {
           return _checks[index];
         }
+      }
+    }
+
+    Future<Cart_API> updateCart(
+        int productID, int quantity, int subTotal) async {
+      // int index = productID;
+      final response = await http.patch(
+        Uri.parse('http://192.168.1.220:3000/cart/$productID'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, dynamic>{
+          'Product ID': productID,
+          'Quantity': quantity,
+          'Sub Total': subTotal,
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        // If the server did return a 200 OK response,
+        // then parse the JSON.
+        return Cart_API.fromJson(jsonDecode(response.body));
+      } else {
+        // If the server did not return a 200 OK response,
+        // then throw an exception.
+        throw Exception('Failed to update cart.');
       }
     }
 
@@ -210,13 +233,37 @@ class _BodyState extends State<Body> {
                                     IconButton(
                                       onPressed: () {
                                         setState(() {
-                                          cartData[index].quantity++;
+                                          productID_cart =
+                                              '${cartData[index].productID}';
+                                          productName_cart =
+                                              '${cartData[index].productName}';
 
-                                          totalCart = cartData[index].quantity *
+                                          productPrice_cart =
+                                              '${cartData[index].price}';
+
+                                          productImage_cart =
+                                              '${cartData[index].image}';
+
+                                          sub_total_cart = productPrice_cart;
+                                          // cập nhật số lượng
+
+                                          cartData[index].quantity++;
+                                          quantity_cart =
+                                              cartData[index].quantity;
+
+                                          // khi nhấn add sẽ update sub_total vào table cart
+                                          totalCart = quantity_cart *
                                               cartData[index].price;
+                                          sub_total_cart = totalCart;
+
+                                          _futurecart = updateCart(
+                                            int.parse(productID_cart),
+                                            quantity_cart,
+                                            sub_total_cart,
+                                          );
                                         });
                                       },
-                                      icon: Icon(Icons.add),
+                                      icon: Icon(Icons.add_circle),
                                     ),
                                     GestureDetector(
                                       onTap: () {},
@@ -232,7 +279,12 @@ class _BodyState extends State<Body> {
                                                     fontSize: 21,
                                                   ),
                                                 )
-                                              : Text("1"),
+                                              : Text(
+                                                  "1",
+                                                  style: TextStyle(
+                                                    fontSize: 20,
+                                                  ),
+                                                ),
                                         ),
                                       ),
                                     ),
@@ -243,7 +295,7 @@ class _BodyState extends State<Body> {
                                         });
                                       },
                                       icon: Icon(
-                                        Icons.remove,
+                                        Icons.remove_circle,
                                       ),
                                     ),
                                   ],
@@ -272,12 +324,11 @@ class _BodyState extends State<Body> {
   }
 }
 
+// ignore: camel_case_types
 class checkBoxModal {
-  String title;
   bool value;
 
   checkBoxModal({
-    @required this.title,
     this.value = false,
   });
 }

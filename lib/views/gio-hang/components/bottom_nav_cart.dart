@@ -56,7 +56,7 @@ class _Bottom_Nav_CartState extends State<Bottom_Nav_Cart> {
                     ),
                   ),
                   Text(
-                    "$totalCart đ",
+                    "$totalCart.000đ",
                     style: TextStyle(
                       fontSize: 20,
                       color: Colors.red,

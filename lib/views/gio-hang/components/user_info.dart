@@ -58,7 +58,7 @@ class userInformation extends StatelessWidget {
               ),
             ),
             Text(
-              "33/1 Phùng Chí Kiên P. Tân Quý Q. Tân Phú",
+              "99 Paster",
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 16,

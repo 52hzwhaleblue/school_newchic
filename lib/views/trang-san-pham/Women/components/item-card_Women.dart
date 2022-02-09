@@ -131,10 +131,10 @@ class _item_cardState extends State<item_card_Women> {
                               },
                               icon: (getStatusIcon(index))
                                   ? Icon(
-                                      Icons.favorite,
+                                      Icons.add_shopping_cart,
                                       color: Colors.red,
                                     )
-                                  : Icon(Icons.favorite_border_outlined),
+                                  : Icon(Icons.add_shopping_cart),
                             ),
                           ],
                         ),

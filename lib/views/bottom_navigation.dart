@@ -7,8 +7,8 @@ import 'package:onboarding_demo/views/layout.dart';
 
 import 'package:onboarding_demo/views/trang-san-pham/Men/MenScreen.dart';
 
+// ignore: camel_case_types
 class Bottom_Navigation extends StatefulWidget {
-  // này nè
   const Bottom_Navigation({
     Key key,
   }) : super(key: key);
@@ -60,11 +60,9 @@ class _Bottom_NavigationState extends State<Bottom_Navigation> {
     });
   }
 
-  List<Widget> _widgetOption = <Widget>[
-    CategoryScreen(),
-  ];
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return BottomNavigationBar(
       selectedItemColor: Colors.red,
       unselectedItemColor: Colors.grey,
@@ -84,11 +82,16 @@ class _Bottom_NavigationState extends State<Bottom_Navigation> {
           label: "Category",
         ),
         BottomNavigationBarItem(
-          icon: Icon(
-            Icons.shopping_cart_outlined,
-            size: 25,
-          ),
-          label: "Cart",
+          icon: _selectedIndex == 2
+              ? Icon(
+                  Icons.favorite,
+                  size: 25,
+                )
+              : Icon(
+                  Icons.favorite_border,
+                  size: 25,
+                ),
+          label: "Favorite",
         ),
         BottomNavigationBarItem(
           icon: Icon(
@@ -98,7 +101,7 @@ class _Bottom_NavigationState extends State<Bottom_Navigation> {
           label: "Account",
         ),
       ],
-      currentIndex: _selectedIndex, // :))))
+      currentIndex: _selectedIndex,
       onTap: _onItemsTap,
     );
   }

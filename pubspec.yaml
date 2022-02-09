@@ -23,7 +23,7 @@ environment:
 
 dependencies:
   flutter_swiper: ^1.1.6
-  get: any
+  get: 4.6.1
   flutter:
     sdk: flutter
 
@@ -34,8 +34,10 @@ dependencies:
   http: ^0.13.4
   firebase_auth:
   google_sign_in:
+  top_snackbar_flutter: 1.0.2
 
 dev_dependencies:
+  badges: ^1.1.3
   flutter_test:
     sdk: flutter
 
@@ -47,6 +49,12 @@ flutter:
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
+  fonts:
+    - family: Inter
+      fonts: 
+       - asset: assets/font/Inter/statiI/Inter-Regular.ttf
+       - asset: assets/font/Inter/static/Inter-Bold.ttf
+         style: italic
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:

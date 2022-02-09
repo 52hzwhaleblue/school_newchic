@@ -117,17 +117,20 @@ class _item_cardState extends State<item_card_Army> {
                           ),
                         ),
                         IconButton(
-                            onPressed: () {
-                              setState(() {
-                                setStatusIcon(index);
-                              });
-                            },
-                            icon: (getStatusIcon(index))
-                                ? Icon(
-                                    Icons.favorite,
-                                    color: Colors.red,
-                                  )
-                                : Icon(Icons.favorite_border_outlined)),
+                          onPressed: () {
+                            setState(() {
+                              setStatusIcon(index);
+                            });
+                          },
+                          icon: (getStatusIcon(index))
+                              ? Icon(
+                                  Icons.add_shopping_cart,
+                                  color: Colors.red,
+                                )
+                              : Icon(
+                                  Icons.add_shopping_cart,
+                                ),
+                        ),
                       ],
                     ),
                     Padding(
