@@ -10,9 +10,12 @@ class title extends StatelessWidget {
     return Column(
       children: [
         Text(
-          "Welcome Back!",
+          "Sign up your account",
           style: TextStyle(
-              fontSize: 40, color: Colors.white, fontWeight: FontWeight.bold),
+            fontSize: 40,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ],
     );

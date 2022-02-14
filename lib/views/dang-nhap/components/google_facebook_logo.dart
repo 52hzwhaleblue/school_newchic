@@ -19,14 +19,14 @@ class _google_facebookState extends State<google_facebook_logo> {
         setState(() {});
       },
       child: Padding(
-        padding: const EdgeInsets.only(top: 50),
+        padding: const EdgeInsets.only(top: 10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             IconButton(
               onPressed: () {
                 setState(() {
-                 // _signInWithGoogle();
+                  // _signInWithGoogle();
                 });
               },
               icon: Image.asset("assets/logo/google.png"),

@@ -1,6 +1,7 @@
 library welcome.dart;
 
 import 'package:flutter/material.dart';
+import 'package:onboarding_demo/views/dang-ky/components/body.dart';
 import 'package:onboarding_demo/views/dang-nhap/login_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -14,31 +15,7 @@ class _RegisterState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text("Register"),
-              const SizedBox(
-                height: 50,
-              ),
-              OutlinedButton.icon(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => LoginScreen(),
-                    ),
-                  );
-                },
-                icon: const Icon(Icons.exit_to_app, size: 18),
-                label: const Text("Logout"),
-              ),
-            ],
-          ),
-        ),
-      ),
+      body: Body(),
     );
   }
 }

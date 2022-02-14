@@ -10,7 +10,7 @@ class subTitle extends StatelessWidget {
     return Column(
       children: [
         Text(
-          "Sign in to your account",
+          "Sign up to dress up",
           style: TextStyle(fontSize: 28, color: Colors.white),
         ),
       ],
