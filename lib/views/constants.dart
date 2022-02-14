@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 // ignore: constant_identifier_names
@@ -16,17 +18,17 @@ bool isCliked_Army = false;
 bool isDisableButton_army = true;
 
 // khi user nhấn mua hàng, thêm thông tin sản phẩm vào giỏ hàng
-var productID_cart;
-var productName_cart;
-var productPrice_cart;
-var productImage_cart;
-var quantity_cart;
-var sub_total_cart;
+var productIDCart;
+var productNameCart;
+var productPriceCart;
+var productImageCart;
+var quantityCart;
+var subTotalCart;
 var isAdd;
 
-var product_status = true;
-var product_type;
-var quantity_product;
+var productStatus = true;
+var productType;
+var quantityProduct;
 
 // khi sản phẩm đã có trong giỏ hàng, cập nhật trạng thái sản phẩm = true (default = false)
 
@@ -36,10 +38,13 @@ bool allCheck = false;
 var itemsQuantity = 1;
 var totalCart = 0;
 
-var i1;
-var i2;
-var i3;
-var i4;
-var i5;
-var i6;
-var i7;
+// đăng ký
+final TextEditingController emailController = TextEditingController();
+final TextEditingController passwordController = TextEditingController();
+final TextEditingController phoneController = TextEditingController();
+final TextEditingController fullNameController = TextEditingController();
+
+var fullname;
+var phone;
+var email;
+var password;

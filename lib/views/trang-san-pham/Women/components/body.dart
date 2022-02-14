@@ -23,10 +23,7 @@ class BodyWomen extends StatefulWidget {
 }
 
 class _BodyState extends State<BodyWomen> {
-  final _controller = TextEditingController();
-  int _currentMen = 0;
   int _currentWomen = 0;
-  int _currentArmy = 0;
 
   List<T> map<T>(List list, Function handler) {
     List<T> result = [];

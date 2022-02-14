@@ -6,11 +6,10 @@ import 'package:onboarding_demo/models/api-product/productMen.dart';
 import 'package:onboarding_demo/models/cart_api.dart';
 import 'package:onboarding_demo/network/network_request.dart';
 import 'package:onboarding_demo/views/constants.dart';
-import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 import 'package:onboarding_demo/views/trang-san-pham/Men/product_detail_men.dart';
 
+// ignore: camel_case_types
 class item_card_Men extends StatefulWidget {
   const item_card_Men({
     Key key,
@@ -93,8 +92,15 @@ class _item_cardState extends State<item_card_Men> {
       },
     );
 
-    Future<Cart_API> createCart(int productID, String productName, int price,
-        int quantity, String image, int sub_total, bool isAdd) async {
+    Future<Cart_API> createCart(
+      int productID,
+      String productName,
+      int price,
+      int quantity,
+      String image,
+      int sub_total,
+      bool isAdd,
+    ) async {
       final response = await http.post(
         Uri.parse('http://192.168.1.220:3000/cart'),
         headers: <String, String>{
@@ -223,21 +229,22 @@ class _item_cardState extends State<item_card_Men> {
                                 onPressed: () {
                                   setState(() {
                                     setStatusIcon(index);
-                                    productID_cart = productMenData[index].id;
-                                    productName_cart =
+
+                                    productIDCart = productMenData[index].id;
+                                    productNameCart =
                                         '${productMenData[index].name}';
 
-                                    productPrice_cart =
+                                    productPriceCart =
                                         '${productMenData[index].price}';
 
-                                    productImage_cart =
+                                    productImageCart =
                                         '${productMenData[index].image}';
 
-                                    int.parse(productPrice_cart);
+                                    int.parse(productPriceCart);
 
-                                    quantity_cart = 1;
+                                    quantityCart = 1;
 
-                                    sub_total_cart = productPrice_cart;
+                                    subTotalCart = productPriceCart;
 
                                     isAdd = true;
 
@@ -257,12 +264,12 @@ class _item_cardState extends State<item_card_Men> {
                                         );
                                     } else {
                                       _futurecart = createCart(
-                                        productID_cart,
-                                        productName_cart,
-                                        int.parse(productPrice_cart),
-                                        quantity_cart,
-                                        productImage_cart,
-                                        int.parse(sub_total_cart),
+                                        productIDCart,
+                                        productNameCart,
+                                        int.parse(productPriceCart),
+                                        quantityCart,
+                                        productImageCart,
+                                        int.parse(subTotalCart),
                                         isAdd,
                                       );
 

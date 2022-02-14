@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:onboarding_demo/views/dang-ky/register.dart';
+import 'package:onboarding_demo/views/dang-nhap/login_screen.dart';
 import 'package:onboarding_demo/views/layout.dart';
 
 import 'package:firebase_core/firebase_core.dart';
@@ -18,6 +19,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: RegisterScreen(),
+        // body: Layout(),
       ),
     );
   }

@@ -233,33 +233,33 @@ class _BodyState extends State<Body> {
                                     IconButton(
                                       onPressed: () {
                                         setState(() {
-                                          productID_cart =
+                                          productIDCart =
                                               '${cartData[index].productID}';
-                                          productName_cart =
+                                          productNameCart =
                                               '${cartData[index].productName}';
 
-                                          productPrice_cart =
+                                          productPriceCart =
                                               '${cartData[index].price}';
 
-                                          productImage_cart =
+                                          productImageCart =
                                               '${cartData[index].image}';
 
-                                          sub_total_cart = productPrice_cart;
+                                          subTotalCart = productPriceCart;
                                           // cập nhật số lượng
 
                                           cartData[index].quantity++;
-                                          quantity_cart =
+                                          quantityCart =
                                               cartData[index].quantity;
 
-                                          // khi nhấn add sẽ update sub_total vào table cart
-                                          totalCart = quantity_cart *
+                                          // khi nhấn add sẽ update subTotal vào table cart
+                                          totalCart = quantityCart *
                                               cartData[index].price;
-                                          sub_total_cart = totalCart;
+                                          subTotalCart = totalCart;
 
                                           _futurecart = updateCart(
-                                            int.parse(productID_cart),
-                                            quantity_cart,
-                                            sub_total_cart,
+                                            int.parse(productIDCart),
+                                            quantityCart,
+                                            subTotalCart,
                                           );
                                         });
                                       },

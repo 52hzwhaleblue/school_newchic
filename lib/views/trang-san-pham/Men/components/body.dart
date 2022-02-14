@@ -19,7 +19,6 @@ class BodyMen extends StatefulWidget {
 }
 
 class _BodyState extends State<BodyMen> {
-  final _controller = TextEditingController();
   int _current = 0;
 
   List<T> map<T>(List list, Function handler) {
