@@ -1,12 +1,12 @@
 // ignore: camel_case_types
 class api_productMen {
-  int id;
+  String id;
   String name;
   int price;
   int quantity;
   String image;
   String type;
-  bool status;
+  int status;
 
   api_productMen({
     this.id,

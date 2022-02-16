@@ -4,6 +4,7 @@ import 'package:onboarding_demo/views/dang-nhap/login_screen.dart';
 import 'package:onboarding_demo/views/layout.dart';
 
 import 'package:firebase_core/firebase_core.dart';
+import 'package:onboarding_demo/views/xac-nhan-gio-hang/confirm_cart.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(fontFamily: 'Inter'),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: RegisterScreen(),
+        body: ConfirmCart(),
         // body: Layout(),
       ),
     );
