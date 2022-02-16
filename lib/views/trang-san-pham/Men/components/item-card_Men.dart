@@ -7,7 +7,8 @@ import 'package:onboarding_demo/models/cart_api.dart';
 import 'package:onboarding_demo/network/network_request.dart';
 import 'package:onboarding_demo/views/constants.dart';
 import 'package:http/http.dart' as http;
-import 'package:onboarding_demo/views/trang-san-pham/Men/product_detail_men.dart';
+import 'package:onboarding_demo/views/trang-san-pham-chi-tiet/product_details_constants.dart';
+import 'package:onboarding_demo/views/trang-san-pham-chi-tiet/product_detail_men.dart';
 
 // ignore: camel_case_types
 class item_card_Men extends StatefulWidget {
@@ -157,46 +158,49 @@ class _item_cardState extends State<item_card_Men> {
     //   }
     // }
 
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => ProductDetailMen(),
+    return Container(
+      padding: EdgeInsets.only(right: 5),
+      height: size.height * productMen.length / 4.5,
+      width: size.width,
+      child: GridView.builder(
+          physics: NeverScrollableScrollPhysics(),
+          itemCount: productMenData.length,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2, // bề ngang
+            childAspectRatio: 0.75,
+            mainAxisSpacing: 30, // khoảng cách trên dưới
+            crossAxisSpacing: 1,
           ),
-        );
-      },
-      child: Container(
-        padding: EdgeInsets.only(right: 5),
-        height: size.height * productMen.length / 4.5,
-        width: size.width,
-        child: GridView.builder(
-            physics: NeverScrollableScrollPhysics(),
-            itemCount: productMenData.length,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2, // bề ngang
-              childAspectRatio: 0.75,
-              mainAxisSpacing: 30, // khoảng cách trên dưới
-              crossAxisSpacing: 1,
-            ),
-            itemBuilder: (BuildContext context, index) {
-              return Padding(
-                padding: const EdgeInsets.only(left: 16),
-                child: Container(
-                  width: widget.size.width * 0.45,
-                  height: widget.size.height * 0.4,
-                  decoration: BoxDecoration(
-                    color: Colors.grey.shade200,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(20),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        offset: Offset(4, 6),
-                        color: Colors.grey.withOpacity(0.5),
-                      ),
-                    ],
+          itemBuilder: (BuildContext context, index) {
+            return Padding(
+              padding: const EdgeInsets.only(left: 16),
+              child: Container(
+                width: widget.size.width * 0.45,
+                height: widget.size.height * 0.4,
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade200,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(20),
                   ),
+                  boxShadow: [
+                    BoxShadow(
+                      offset: Offset(4, 6),
+                      color: Colors.grey.withOpacity(0.5),
+                    ),
+                  ],
+                ),
+                child: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      productID = productMenData[index].id;
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ProductDetailMen(),
+                        ),
+                      );
+                    });
+                  },
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -322,9 +326,9 @@ class _item_cardState extends State<item_card_Men> {
                     ],
                   ),
                 ),
-              );
-            }),
-      ),
+              ),
+            );
+          }),
     );
   }
 }
