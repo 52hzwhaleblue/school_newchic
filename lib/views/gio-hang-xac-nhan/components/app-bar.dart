@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:onboarding_demo/views/gio-hang/cart_screen.dart';
 
 class Header extends StatefulWidget with PreferredSizeWidget {
   const Header({
@@ -26,7 +27,14 @@ class _HeaderState extends State<Header> {
             Icons.arrow_back,
             color: Colors.white,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => CartScreen(),
+              ),
+            );
+          },
         ));
   }
 }

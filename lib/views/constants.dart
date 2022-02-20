@@ -18,13 +18,13 @@ bool isCliked_Army = false;
 bool isDisableButton_army = true;
 
 // khi user nhấn mua hàng, thêm thông tin sản phẩm vào giỏ hàng
-var productIDCart;
-var productNameCart;
-var productPriceCart;
-var productImageCart;
+var idCart;
+var userEmailCart;
+var productSKUCart;
+
 var quantityCart;
-var subTotalCart;
-var isAdd;
+
+var status;
 
 var productStatus = true;
 var productType;

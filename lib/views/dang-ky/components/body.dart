@@ -10,6 +10,7 @@ import 'background.dart';
 import 'register_button.dart';
 import 'sub_title.dart';
 import 'title.dart';
+import 'package:email_validator/email_validator.dart';
 
 class Body extends StatefulWidget {
   Body({Key key}) : super(key: key);
@@ -24,7 +25,7 @@ class _BodyState extends State<Body> {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(color: Colors.black54),
-      child: TextField(
+      child: TextFormField(
         keyboardType: keyboardType,
         controller: controller,
         obscureText: obscureText,

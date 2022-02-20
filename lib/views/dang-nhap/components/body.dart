@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 import 'package:onboarding_demo/views/dang-nhap/components/google_facebook_logo.dart';
+import 'package:onboarding_demo/views/dang-nhap/constants.dart';
 
 import 'back_arrow.dart';
 import 'background.dart';
@@ -20,9 +21,6 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-
   _buildTextFiled(IconData icon, String hintText, bool obscureText,
       TextEditingController controller) {
     return Container(
@@ -33,17 +31,18 @@ class _BodyState extends State<Body> {
         obscureText: obscureText,
         style: TextStyle(color: Colors.white, fontSize: 18),
         decoration: InputDecoration(
-            hintText: hintText,
-            hintStyle: TextStyle(
+          hintText: hintText,
+          hintStyle: TextStyle(
+            color: Colors.grey,
+          ),
+          icon: Padding(
+            padding: const EdgeInsets.only(left: 10),
+            child: Icon(
+              icon,
               color: Colors.grey,
             ),
-            icon: Padding(
-              padding: const EdgeInsets.only(left: 10),
-              child: Icon(
-                icon,
-                color: Colors.grey,
-              ),
-            )),
+          ),
+        ),
       ),
     );
   }

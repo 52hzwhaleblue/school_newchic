@@ -40,17 +40,7 @@ class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    FutureBuilder<Cart_API>(
-      future: _futurecart,
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          return Text(snapshot.data.productName);
-        } else if (snapshot.hasError) {
-          return Text('${snapshot.error}');
-        }
-        return const CircularProgressIndicator();
-      },
-    );
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Container(
@@ -60,13 +50,12 @@ class _BodyState extends State<Body> {
             child: Column(
               children: [
                 userInformation(),
+
                 Container(
                   height: 6,
                   width: size.width,
                   color: Colors.blueGrey[200],
                 ),
-
-                // checkbox tất cả sản phẩm
 
                 Container(
                   height: 2,
@@ -112,6 +101,7 @@ class _BodyState extends State<Body> {
                     ),
                   ],
                 ),
+
                 // danh sách giỏ hàng
                 itemCarts(size),
               ],
@@ -185,7 +175,7 @@ class _BodyState extends State<Body> {
                     width: 100,
                     height: 100,
                     child: Image.network(
-                      '${cartData[index].image}',
+                      'https://imgaz1.chiccdn.com/os/202202/20220209000942_445.jpg.webp',
                       fit: BoxFit.contain,
                     ),
                   ),
@@ -199,13 +189,13 @@ class _BodyState extends State<Body> {
                         Column(
                           children: [
                             Text(
-                              '${cartData[index].productName}',
+                              'ten san pham,',
                               style: TextStyle(fontSize: 20),
                             ),
                             Row(
                               children: [
                                 Text(
-                                  '${cartData[index].price}.000',
+                                  '300.000',
                                   style: TextStyle(
                                     fontSize: 20,
                                     color: Colors.red,
@@ -231,38 +221,7 @@ class _BodyState extends State<Body> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     IconButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          productIDCart =
-                                              '${cartData[index].productID}';
-                                          productNameCart =
-                                              '${cartData[index].productName}';
-
-                                          productPriceCart =
-                                              '${cartData[index].price}';
-
-                                          productImageCart =
-                                              '${cartData[index].image}';
-
-                                          subTotalCart = productPriceCart;
-                                          // cập nhật số lượng
-
-                                          cartData[index].quantity++;
-                                          quantityCart =
-                                              cartData[index].quantity;
-
-                                          // khi nhấn add sẽ update subTotal vào table cart
-                                          totalCart = quantityCart *
-                                              cartData[index].price;
-                                          subTotalCart = totalCart;
-
-                                          _futurecart = updateCart(
-                                            int.parse(productIDCart),
-                                            quantityCart,
-                                            subTotalCart,
-                                          );
-                                        });
-                                      },
+                                      onPressed: () {},
                                       icon: Icon(Icons.add_circle),
                                     ),
                                     GestureDetector(

@@ -5,8 +5,8 @@ import 'package:onboarding_demo/models/home/banner/MEN/MODEL_banner_MEN.dart';
 import 'package:onboarding_demo/network/product_detail_request.dart';
 
 // ignore: camel_case_types
-class image extends StatefulWidget {
-  const image({
+class productImage extends StatefulWidget {
+  const productImage({
     Key key,
     @required this.size,
   }) : super(key: key);
@@ -14,11 +14,11 @@ class image extends StatefulWidget {
   final Size size;
 
   @override
-  State<image> createState() => _imageState();
+  State<productImage> createState() => _productImageState();
 }
 
 // ignore: camel_case_types
-class _imageState extends State<image> {
+class _productImageState extends State<productImage> {
   int _current = 0;
 
   List<api_product_details> productDetailDatas = [];
@@ -34,19 +34,20 @@ class _imageState extends State<image> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Stack(
       children: [
         Row(
           children: [
             Container(
               color: Colors.amber,
-              width: widget.size.width,
-              height: widget.size.height * 0.49,
+              width: size.width,
+              height: size.height * 0.49,
               child: Swiper(
                 onIndexChanged: (index) {
                   _current = index;
                 },
-                autoplay: true,
+                autoplay: false,
                 layout: SwiperLayout.DEFAULT,
                 itemCount: productDetailDatas.length,
                 itemBuilder: (BuildContext context, index) {

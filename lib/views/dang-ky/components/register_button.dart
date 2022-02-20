@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:onboarding_demo/models/user-api.dart';
 import 'package:onboarding_demo/network/register_api.dart';
+import 'package:onboarding_demo/views/dang-nhap/login_screen.dart';
 import 'package:onboarding_demo/views/layout.dart';
 import 'package:http/http.dart' as http;
 
@@ -49,7 +50,7 @@ class _register_buttonState extends State<register_button> {
 
     if (body['success']) {
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => Layout()));
+          context, MaterialPageRoute(builder: (context) => LoginScreen()));
     } else if (body['success'] == false) {
       ScaffoldMessenger.of(context)
         ..removeCurrentSnackBar()
@@ -68,35 +69,6 @@ class _register_buttonState extends State<register_button> {
     }
   }
 
-  // ignore: unused_field
-  Future<UserAPI> _futureUser;
-
-  // register
-  Future<UserAPI> registerUser(
-      String fullname, String phone, String email, String password) async {
-    final response = await http.post(
-      Uri.parse('http://192.168.1.220:3000/users'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(<String, dynamic>{
-        'fullName': fullname,
-        'phone': phone,
-        'email': email,
-        'password': password,
-      }),
-    );
-    if (response.statusCode == 201) {
-      // If the server did return a 201 CREATED response,
-      // then parse the JSON.
-      return UserAPI.fromJson(jsonDecode(response.body));
-    } else {
-      // If the server did not return a 201 CREATED response,
-      // then throw an exception.
-      throw Exception('Failed to register user');
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -107,18 +79,6 @@ class _register_buttonState extends State<register_button> {
           setState(() {
             // đăng ký tài khoản
             _register();
-
-            print(fullNameController.text);
-            // fullname = fullNameController.text;
-            // phone = phoneController.text;
-            // email = emailController.text;
-            // password = passwordController.text;
-            // _futureUser = registerUser(
-            //   fullname,
-            //   phone,
-            //   email,
-            //   password,
-            // );
           });
         },
         child: Text(

@@ -22,6 +22,7 @@ environment:
   # sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
+  intl: ^0.16.0
   flutter_swiper: ^1.1.6
   get: 4.6.1
   flutter:
@@ -32,11 +33,10 @@ dependencies:
   cupertino_icons: ^1.0.0
   flutter_svg: ^1.0.0
   http: ^0.13.4
-  firebase_auth:
-  google_sign_in:
   top_snackbar_flutter: 1.0.2
 
 dev_dependencies:
+  email_validator: ^1.0.6
   badges: ^1.1.3
   flutter_test:
     sdk: flutter
