@@ -97,7 +97,9 @@ class _OnboardingPage extends State<OnboardingPage> {
                   });
                 },
                 child: Obx(() {
-                  return Text(_controller.isLastPage ? 'Start' : 'Next');
+                  return Text(
+                    _controller.isLastPage ? 'Start' : 'Next',
+                  );
                 }),
               ),
             ),

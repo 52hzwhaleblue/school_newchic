@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:onboarding_demo/views/danh-muc-san-pham/category_screen.dart';
 import 'package:onboarding_demo/views/gio-hang/cart_screen.dart';
 import 'package:onboarding_demo/views/layout.dart';
+import 'package:onboarding_demo/views/trang-ca-nhan/account_screen.dart';
 
 import 'package:onboarding_demo/views/trang-san-pham/Men/MenScreen.dart';
 
@@ -51,6 +52,17 @@ class _Bottom_NavigationState extends State<Bottom_Navigation> {
           context,
           MaterialPageRoute(
             builder: (context) => CartScreen(),
+            settings: RouteSettings(
+              arguments: _selectedIndex,
+            ),
+          ),
+        );
+      }
+      if (_selectedIndex == 3) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => AccountScreen(),
             settings: RouteSettings(
               arguments: _selectedIndex,
             ),

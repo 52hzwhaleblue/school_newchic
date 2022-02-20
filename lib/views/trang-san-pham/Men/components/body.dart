@@ -76,6 +76,19 @@ class _BodyState extends State<BodyMen> {
             title(), // You might also like
 
             item_card_Men(size: size),
+
+            Padding(
+              padding: EdgeInsets.all(20),
+              child: Text(
+                "New Products",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
+              ),
+            ),
+
+            item_card_Men(size: size),
           ],
         ),
       ),

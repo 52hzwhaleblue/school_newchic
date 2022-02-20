@@ -3,18 +3,16 @@ class api_productMen {
   String id;
   String name;
   int price;
-  int quantity;
+  int price_high;
   String image;
-  String type;
   int status;
 
   api_productMen({
     this.id,
     this.name,
     this.price,
-    this.quantity,
+    this.price_high,
     this.image,
-    this.type,
     this.status,
   });
 
@@ -22,9 +20,9 @@ class api_productMen {
     id = json['id'];
     name = json['name'];
     price = json['price'];
-    quantity = json['quantity'];
+    price_high = json['price_high'];
     image = json['image'];
-    type = json['type'];
+
     status = json['status'];
   }
 
@@ -33,9 +31,8 @@ class api_productMen {
     data['id'] = this.id;
     data['name'] = this.name;
     data['price'] = this.price;
-    data['quantity'] = this.quantity;
+    data['price_high'] = this.price_high;
     data['image'] = this.image;
-    data['type'] = this.type;
     data['status'] = this.status;
     return data;
   }

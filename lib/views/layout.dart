@@ -91,7 +91,10 @@ class _LayoutState extends State<Layout> {
           ),
         ),
         Badge(
-          position: BadgePosition.topEnd(top: 10, end: 10),
+          position: BadgePosition.topEnd(
+            top: 0,
+            end: 0,
+          ),
           badgeContent: Text(
             '9',
             style: TextStyle(color: Colors.white, fontSize: 10),
@@ -111,7 +114,6 @@ class _LayoutState extends State<Layout> {
                   ),
                 );
               });
-
             },
           ),
         ),
