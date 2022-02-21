@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:badges/badges.dart';
 import 'package:onboarding_demo/models/address-api.dart';
 import 'package:onboarding_demo/network/address_request.dart';
+import 'package:onboarding_demo/views/dang-nhap/constants.dart';
 import 'package:onboarding_demo/views/dia-chi/add-address.dart';
 import 'package:onboarding_demo/views/gio-hang/cart_screen.dart';
 
@@ -89,7 +90,7 @@ class _UserAddressState extends State<UserAddress> {
         ),
         body: ListView.builder(
           padding: const EdgeInsets.all(8),
-          itemCount: addressData.length,
+          itemCount: userList.length,
           itemBuilder: (BuildContext context, int index) {
             return Padding(
               padding: const EdgeInsets.all(8.0),
@@ -102,14 +103,13 @@ class _UserAddressState extends State<UserAddress> {
                       padding: const EdgeInsets.all(10),
                       child: Row(
                         children: [
-                          Text("${addressData[index].reciver}",
+                          Text("${userList[index]}",
                               style: TextStyle(fontSize: 18)),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text("|", style: TextStyle(fontSize: 18)),
                           ),
-                          Text("${addressData[index].phone}",
-                              style: TextStyle(fontSize: 18)),
+                          Text("0523232152423", style: TextStyle(fontSize: 18)),
                         ],
                       ),
                     ),
@@ -127,7 +127,7 @@ class _UserAddressState extends State<UserAddress> {
                           ),
                           Expanded(
                             child: Text(
-                              '${addressData[index].street} + ${addressData[index].ward} + ${addressData[index].disctrict} + ${addressData[index].city}',
+                              '33/1 Phùng Chí Kiên',
                               style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 16,

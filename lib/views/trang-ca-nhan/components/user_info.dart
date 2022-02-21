@@ -55,7 +55,7 @@ class _UserInfoState extends State<UserInfo> {
               child: CircleAvatar(
                 radius: 50.0,
                 backgroundImage: NetworkImage(
-                    "https://scontent.fsgn2-3.fna.fbcdn.net/v/t39.30808-6/273613671_1345060255968483_458924592858524926_n.jpg?_nc_cat=108&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=ziOUFiKh1j0AX8UVX1Z&_nc_ht=scontent.fsgn2-3.fna&oh=00_AT-kZW6F8Ejr0sv91nrwyU9pSFsfNd6hodfm7xmI4iXI9A&oe=621397AC"),
+                    "https://scontent.fpnh22-4.fna.fbcdn.net/v/t39.30808-6/273613671_1345060255968483_458924592858524926_n.jpg?_nc_cat=108&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=9kLzn0CzgzoAX_ix9kJ&_nc_ht=scontent.fpnh22-4.fna&oh=00_AT_pEWINGZy5mliH9lRzIDZ6Q_mxh9BUxHvPLnmrghFUYQ&oe=6219866C"),
               ),
             ),
           ],

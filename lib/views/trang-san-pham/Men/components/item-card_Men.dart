@@ -190,25 +190,50 @@ class _item_cardState extends State<item_card_Men> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 10),
-                      child: Row(
+                      child: Column(
                         children: [
-                          Text(
-                            NumberFormat.decimalPattern()
-                                .format(productMenData[index].price),
-                            style: TextStyle(
-                              fontSize: 25,
-                              color: Colors.pink.shade400,
-                              fontWeight: FontWeight.bold,
-                            ),
+                          Row(
+                            children: [
+                              Text(
+                                NumberFormat.decimalPattern()
+                                    .format(productMenData[index].price),
+                                style: TextStyle(
+                                  fontSize: 25,
+                                  color: Colors.pink.shade400,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                "đ",
+                                style: TextStyle(
+                                  fontSize: 25,
+                                  color: Colors.pinkAccent[400],
+                                  decoration: TextDecoration.underline,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
                           ),
-                          Text(
-                            "đ",
-                            style: TextStyle(
-                              fontSize: 25,
-                              color: Colors.pinkAccent[400],
-                              decoration: TextDecoration.underline,
-                              fontWeight: FontWeight.bold,
-                            ),
+                          Row(
+                            children: [
+                              Text(
+                                NumberFormat.decimalPattern()
+                                    .format(productMenData[index].price_high),
+                                style: TextStyle(
+                                  fontSize: 19,
+                                  color: Colors.black,
+                                  decoration: TextDecoration.lineThrough,
+                                ),
+                              ),
+                              Text(
+                                "đ",
+                                style: TextStyle(
+                                  fontSize: 19,
+                                  color: Colors.black,
+                                  decoration: TextDecoration.lineThrough,
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
