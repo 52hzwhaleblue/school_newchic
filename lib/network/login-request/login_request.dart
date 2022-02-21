@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:onboarding_demo/models/cart_api.dart';
 import 'package:onboarding_demo/models/user-api.dart';
+import 'package:onboarding_demo/views/dang-nhap/constants.dart';
 import 'package:onboarding_demo/views/layout.dart';
 
 class LoginCallAPI {
@@ -19,7 +20,9 @@ class LoginCallAPI {
               'email': email,
               'password': password,
             }));
-    print(response.body);
+    userList = response.body;
+    print(json.encode(userList));
+
     if (response.statusCode == 200) {
       userData = userFromJson(response.body);
       print(userData);
