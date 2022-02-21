@@ -48,3 +48,6 @@ var fullname;
 var phone;
 var email;
 var password;
+
+// thiết lập cá nhân
+var userID;

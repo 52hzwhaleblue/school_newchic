@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart';
+import 'package:onboarding_demo/models/address-api.dart';
+import 'package:onboarding_demo/network/address_request.dart';
 import 'package:onboarding_demo/views/dia-chi/add-address.dart';
 import 'package:onboarding_demo/views/gio-hang/cart_screen.dart';
 
@@ -11,6 +13,19 @@ class UserAddress extends StatefulWidget {
 }
 
 class _UserAddressState extends State<UserAddress> {
+  List<Address> addressData;
+  @override
+  void initState() {
+    super.initState();
+    // lấy danh sách address với userID
+
+    AddressRequest.fetchAddress().then((dataFromServe) {
+      setState(() {
+        addressData = dataFromServe;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -74,7 +89,7 @@ class _UserAddressState extends State<UserAddress> {
         ),
         body: ListView.builder(
           padding: const EdgeInsets.all(8),
-          itemCount: 2,
+          itemCount: addressData.length,
           itemBuilder: (BuildContext context, int index) {
             return Padding(
               padding: const EdgeInsets.all(8.0),
@@ -87,13 +102,14 @@ class _UserAddressState extends State<UserAddress> {
                       padding: const EdgeInsets.all(10),
                       child: Row(
                         children: [
-                          Text("Nguyễn Vũ Minh Long",
+                          Text("${addressData[index].reciver}",
                               style: TextStyle(fontSize: 18)),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text("|", style: TextStyle(fontSize: 18)),
                           ),
-                          Text("0701142349", style: TextStyle(fontSize: 18)),
+                          Text("${addressData[index].phone}",
+                              style: TextStyle(fontSize: 18)),
                         ],
                       ),
                     ),
@@ -111,7 +127,7 @@ class _UserAddressState extends State<UserAddress> {
                           ),
                           Expanded(
                             child: Text(
-                              "33/1 Âu Cơ Quận Tân Phú33/1 Âu Cơ Quận Tân Phú33/1 Âu Cơ Quận Tân Phú33/1 Âu Cơ Quận Tân Phú",
+                              '${addressData[index].street} + ${addressData[index].ward} + ${addressData[index].disctrict} + ${addressData[index].city}',
                               style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 16,

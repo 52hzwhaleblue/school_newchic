@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart';
+import 'package:onboarding_demo/views/thiet-lap-ca-nhan/profile_setting.dart';
 
 class ProfileAppBar extends StatefulWidget with PreferredSizeWidget {
   const ProfileAppBar({
@@ -22,7 +23,13 @@ class _ProfileAppBarState extends State<ProfileAppBar> {
       title: Text("Cá nhân"),
       actions: [
         IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ProfileSetting(),
+                ));
+          },
           icon: Icon(
             Icons.settings_outlined,
           ),

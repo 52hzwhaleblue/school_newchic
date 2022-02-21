@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:onboarding_demo/models/user-api.dart';
+import 'package:onboarding_demo/views/constants.dart';
+import 'package:onboarding_demo/views/dang-nhap/constants.dart';
 import 'package:onboarding_demo/views/dia-chi/user-address.dart';
 
 import 'package:onboarding_demo/views/thiet-lap-ca-nhan/account_info.dart';
+import 'package:onboarding_demo/network/getUserID_request.dart';
 
 class ProfileSetting extends StatefulWidget {
   ProfileSetting({Key key}) : super(key: key);
@@ -11,6 +15,20 @@ class ProfileSetting extends StatefulWidget {
 }
 
 class _ProfileSettingState extends State<ProfileSetting> {
+  List<User> usersData = [];
+
+  @override
+  void initState() {
+    super.initState();
+    //get & fetch userID
+
+    getUserID.fetchUserID().then((dataFromServe) {
+      setState(() {
+        usersData = dataFromServe;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -27,83 +45,37 @@ class _ProfileSettingState extends State<ProfileSetting> {
           ),
           title: Text("Thiết Lập Cá Nhân"),
         ),
-        body: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: GestureDetector(
-                onTap: () {
-                  setState(() {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => AccountInfo(),
-                      ),
-                    );
-                  });
-                },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Thông Tin Tài Khoản",
-                      style: TextStyle(
-                        fontSize: 17,
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        setState(() {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => AccountInfo(),
-                            ),
-                          );
-                        });
-                      },
-                      icon: Icon(
-                        Icons.arrow_forward_ios,
-                        size: 20,
-                        color: Colors.blue,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
+        body: ListView.builder(
+          padding: const EdgeInsets.all(8),
+          itemCount: usersData.length,
+          itemBuilder: (BuildContext context, int index) {
+            return Container(
+              height: 50,
+              color: Colors.amber,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    "Sổ địa chỉ",
-                    style: TextStyle(
-                      fontSize: 17,
-                    ),
-                  ),
+                  Text("Sổ địa chỉ"),
                   IconButton(
                     onPressed: () {
                       setState(() {
+                        userID = usersData[index].id;
+                        print(userID);
+
                         Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => UserAddress(),
-                          ),
-                        );
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => UserAddress(),
+                            ));
                       });
                     },
                     icon: Icon(
                       Icons.arrow_forward_ios,
-                      size: 20,
-                      color: Colors.blue,
                     ),
                   ),
                 ],
               ),
-            ),
-          ],
+            );
+          },
         ),
         bottomNavigationBar: Padding(
           padding: const EdgeInsets.only(
