@@ -21,7 +21,6 @@ class _BodyState extends State<Body> {
 
   var total = 0;
   List<Cart_API> cartData = [];
-  Future<Cart_API> _futurecart;
 
   @override
   void initState() {
@@ -175,7 +174,7 @@ class _BodyState extends State<Body> {
                     width: 100,
                     height: 100,
                     child: Image.network(
-                      'https://imgaz1.chiccdn.com/os/202202/20220209000942_445.jpg.webp',
+                      '${cartData[index].productImage}',
                       fit: BoxFit.contain,
                     ),
                   ),
@@ -189,13 +188,13 @@ class _BodyState extends State<Body> {
                         Column(
                           children: [
                             Text(
-                              'ten san pham,',
+                              '${cartData[index].productSKU}',
                               style: TextStyle(fontSize: 20),
                             ),
                             Row(
                               children: [
                                 Text(
-                                  '300.000',
+                                  '${cartData[index].productPrice}',
                                   style: TextStyle(
                                     fontSize: 20,
                                     color: Colors.red,
@@ -239,7 +238,7 @@ class _BodyState extends State<Body> {
                                                   ),
                                                 )
                                               : Text(
-                                                  "1",
+                                                  '${cartData[index].quantity}',
                                                   style: TextStyle(
                                                     fontSize: 20,
                                                   ),

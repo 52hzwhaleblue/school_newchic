@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:onboarding_demo/models/address-api.dart';
+
 User userFromJson(String str) => User.fromJson(json.decode(str));
 
 String userToJson(User data) => json.encode(data.toJson());
@@ -20,7 +22,6 @@ class User {
     this.createdAt,
     this.updatedAt,
     this.status,
-    this.address,
   });
 
   String id;
@@ -33,7 +34,6 @@ class User {
   dynamic createdAt;
   dynamic updatedAt;
   int status;
-  List<Address> address;
 
   factory User.fromJson(Map<String, dynamic> json) => User(
         id: json["id"],
@@ -46,8 +46,8 @@ class User {
         createdAt: json["created_at"],
         updatedAt: json["updated_at"],
         status: json["status"],
-        address:
-            List<Address>.from(json["address"].map((x) => Address.fromJson(x))),
+        // address:
+        //     List<Address>.from(json["address"].map((x) => Address.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -61,22 +61,6 @@ class User {
         "created_at": createdAt,
         "updated_at": updatedAt,
         "status": status,
-        "address": List<dynamic>.from(address.map((x) => x.toJson())),
-      };
-}
-
-class Address {
-  Address({
-    this.reciver,
-  });
-
-  String reciver;
-
-  factory Address.fromJson(Map<String, dynamic> json) => Address(
-        reciver: json["reciver"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "reciver": reciver,
+        // "address": List<dynamic>.from(address.map((x) => x.toJson())),
       };
 }

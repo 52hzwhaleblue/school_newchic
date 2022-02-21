@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:onboarding_demo/views/dang-ky/register.dart';
 import 'package:onboarding_demo/views/dang-nhap/login_screen.dart';
+import 'package:onboarding_demo/views/gio-hang/cart_screen.dart';
 import 'package:onboarding_demo/views/layout.dart';
 import 'package:onboarding_demo/views/onboarding_page/onboarding_page.dart';
 import 'package:onboarding_demo/views/thiet-lap-ca-nhan/profile_setting.dart';

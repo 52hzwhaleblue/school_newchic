@@ -6,13 +6,14 @@ import 'package:onboarding_demo/models/api-product-dedtails.dart';
 
 import 'package:onboarding_demo/models/api-product/productMen.dart';
 import 'package:onboarding_demo/models/cart_api.dart';
-import 'package:onboarding_demo/network/network_request.dart';
+import 'package:onboarding_demo/network/product_detail_request.dart';
 
 import 'package:onboarding_demo/network/product_detail_request_productName.dart';
 import 'package:onboarding_demo/views/constants.dart';
 import 'package:http/http.dart' as http;
 import 'package:onboarding_demo/views/dang-nhap/constants.dart';
 import 'package:onboarding_demo/network/product_detail_request_productSKU.dart';
+import 'package:onboarding_demo/views/gio-hang/cart_screen.dart';
 
 class ProductName extends StatefulWidget {
   const ProductName({
@@ -26,7 +27,7 @@ class ProductName extends StatefulWidget {
 class _ProductNameState extends State<ProductName> {
   List<api_productMen> productNameDatas = [];
   List<api_productMen> productPriceDatas = [];
-  List<api_productMen> productMenData = [];
+  List<api_product_details> productDetailDatas = [];
   List<api_product_details> productDetailSKUDatas = [];
 
   Future<Cart_API> _futurecart;
@@ -39,9 +40,9 @@ class _ProductNameState extends State<ProductName> {
       });
     });
 
-    NetworkRequest.fetchProductMen().then((dataFromServe) {
+    requestProductDetailAPI.fetchProductDetails().then((dataFromServe) {
       setState(() {
-        productMenData = dataFromServe;
+        productDetailDatas = dataFromServe;
       });
     });
 
@@ -66,15 +67,35 @@ class _ProductNameState extends State<ProductName> {
           'Content-Type': 'application/json; charset=UTF-8',
         },
         body: jsonEncode(<String, dynamic>{
-          'User  Email': userEmail,
-          'Product SKU': productSKU,
-          'Quantity': quantity,
+          'userEmail': userEmail,
+          'productSKU': productSKU,
+          'quantity': quantity,
           'status': status,
         }),
       );
-      if (response.statusCode == 201) {
-        // If the server did return a 201 CREATED response,
-        // then parse the JSON.
+      if (response.statusCode == 200) {
+        ScaffoldMessenger.of(context)
+          ..removeCurrentSnackBar()
+          ..showSnackBar(
+            SnackBar(
+              content: Text(
+                "Thêm vào giỏ hàng thành công",
+              ),
+              action: SnackBarAction(
+                label: "Xem giỏ hàng",
+                textColor: Colors.green,
+                onPressed: () {
+                  setState(() {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CartScreen(),
+                        ));
+                  });
+                },
+              ),
+            ),
+          );
         return Cart_API.fromJson(jsonDecode(response.body));
       } else {
         // If the server did not return a 201 CREATED response,
@@ -107,7 +128,7 @@ class _ProductNameState extends State<ProductName> {
                     IconButton(
                       onPressed: () {
                         setState(() {
-                          productSKUCart = "AHD-Black";
+                          productSKUCart = productDetailDatas[index].SKU;
                           quantityCart = 1;
                           status = 1;
 
@@ -117,6 +138,8 @@ class _ProductNameState extends State<ProductName> {
                             quantityCart,
                             status,
                           );
+
+                          print("Mã SKU" + productSKUCart);
                         });
                       },
                       icon: Icon(
